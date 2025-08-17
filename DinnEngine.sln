@@ -1,26 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExampleGame", "ExampleGame\ExampleGame.vcxproj", "{93142D8A-5219-4557-B437-A37A64B2DC97}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DinnEngine", "DinnEngine\DinnEngine.vcxproj", "{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Debug|x64.ActiveCfg = Debug|x64
 		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Debug|x64.Build.0 = Debug|x64
-		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Debug|x86.ActiveCfg = Debug|Win32
-		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Debug|x86.Build.0 = Debug|Win32
 		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Release|x64.ActiveCfg = Release|x64
 		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Release|x64.Build.0 = Release|x64
-		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Release|x86.ActiveCfg = Release|Win32
-		{9CC9F21F-766B-4BBF-BDB7-4B20FDDE0646}.Release|x86.Build.0 = Release|Win32
+		{93142D8A-5219-4557-B437-A37A64B2DC97}.Debug|x64.ActiveCfg = Debug|x64
+		{93142D8A-5219-4557-B437-A37A64B2DC97}.Debug|x64.Build.0 = Debug|x64
+		{93142D8A-5219-4557-B437-A37A64B2DC97}.Release|x64.ActiveCfg = Release|x64
+		{93142D8A-5219-4557-B437-A37A64B2DC97}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
