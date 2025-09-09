@@ -418,3 +418,4 @@ FodyWeavers.xsd
 *.msp
 bin-int
 *.vcxproj.filters
+bin
