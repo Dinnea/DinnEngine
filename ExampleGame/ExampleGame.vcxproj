@@ -57,7 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DN_PLATFORM_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DinnEngine\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DinnEngine\src;$(SolutionDir)DinnEngine\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,7 +72,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DN_PLATFORM_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DinnEngine\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DinnEngine\src;$(SolutionDir)DinnEngine\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,7 +80,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ExampleGame.cpp" />
+    <ClCompile Include="src\ExampleGame.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DinnEngine\DinnEngine.vcxproj">

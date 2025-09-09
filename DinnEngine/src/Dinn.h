@@ -3,6 +3,7 @@
 // For use by applications
 
 #include "DinnCore/Application.h"
+#include "DinnCore/Log.h"
 #include "stdio.h"
 
 // ------------- Entry Point ---------------- //

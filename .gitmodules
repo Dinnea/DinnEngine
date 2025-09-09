@@ -1,0 +1,3 @@
+[submodule "DinnEngine/vendor/spdlog"]
+	path = DinnEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog

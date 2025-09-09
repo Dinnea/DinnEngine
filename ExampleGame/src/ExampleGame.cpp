@@ -18,5 +18,3 @@ Dinn::Application* Dinn::CreateApplication()
 {
 	return new Example();
 }
-
-
