@@ -1,5 +1,9 @@
 #pragma once
 #include "Core.h"
+#include "Time.h"
+#include "Log.h"
+#include <chrono>
+#include <thread>
 
 namespace Dinn
 {
@@ -10,6 +14,12 @@ namespace Dinn
 		virtual ~Application();
 
 		void Run();
+		void SetTargetFrameRate(unsigned int frameRate);
+
+	private:
+		bool isRunning;
+		unsigned int maxFrameRate;
+		double lastFrame;
 	};
 
 	// To be defined in client
