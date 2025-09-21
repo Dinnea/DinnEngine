@@ -1,12 +1,15 @@
+#---------------------------------
+# Define game sources
+#---------------------------------
 file(GLOB_RECURSE EG_SRC CONFIGURE_DEPENDS
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
+"${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+"${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
 )
 
 #---------------------------------
-# Define the execulable
+# Set the exe
 #---------------------------------
-add_executable(ExampleGame ${EG_SRC})
+add_executable(${TARGET_GAME} ${EG_SRC})
 
 #---------------------------------
 # Link the engine (headers and libraries)
@@ -14,11 +17,31 @@ add_executable(ExampleGame ${EG_SRC})
 target_link_libraries(ExampleGame PRIVATE DinnEngine)
 
 #---------------------------------
+# Game-specific defines
+#---------------------------------
+target_compile_definitions(${TARGET_GAME}
+  PRIVATE
+    DN_PLATFORM_WINDOWS
+    $<$<CONFIG:Debug>:DN_DEBUG>
+    $<$<CONFIG:Release>:DN_RELEASE>
+)
+
+#---------------------------------
+# Set output folders
+#---------------------------------
+set_target_properties(${TARGET_GAME} PROPERTIES
+  VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:${TARGET_GAME}>"
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_GAME}"
+  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_GAME}"
+  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin-int/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_GAME}"
+)
+
+#---------------------------------
 # Copy the dll to the .exe file's location
 #---------------------------------
-if(WIN32)
+if(WIN32) #only windows supported
     add_custom_command(TARGET ExampleGame POST_BUILD
-    COMMAND $(CMAKE_COMMAND) -E copy_if_different
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "$<TARGET_FILE:DinnEngine>"
         "$<TARGET_FILE_DIR:ExampleGame>/DinnEngine.dll"
         )

@@ -8,20 +8,14 @@ project(DinnEngine LANGUAGES CXX)
 set (CMAKE_CXX_STANDARD 17)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(PLATFORM_SUFFIX "-windows-x86_64")
+set(TARGET_ENGINE "DinnEngine")
+set(TARGET_GAME "ExampleGame")
+
 if (MSVC)
     set (CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
     add_compile_options("/utf-8")
 endif()
-
-#---------------------------------
-# Output folders
-#---------------------------------
-
-foreach(cfg IN ITEMS Debug Release)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${cfg} "${CMAKE_SOURCE_DIR}/bin/${cfg}")
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${cfg} "${CMAKE_SOURCE_DIR}/bin/${cfg}")
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${cfg} "${CMAKE_SOURCE_DIR}/bin-int/${cfg}")
-endforeach()
 
 #---------------------------------
 # Subproject folders
