@@ -21,5 +21,7 @@ endif()
 # Subproject folders
 #---------------------------------
 
-add_subdirectory(DinnEngine)
-add_subdirectory(ExampleGame)
+add_subdirectory(${TARGET_ENGINE})
+add_subdirectory(${TARGET_GAME})
+
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${TARGET_GAME})

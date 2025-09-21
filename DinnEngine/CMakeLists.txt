@@ -16,7 +16,7 @@ add_library(${TARGET_ENGINE} SHARED ${DN_SRC})
 target_include_directories(DinnEngine
   PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/spdlog/include"
 )
 
 #---------------------------------

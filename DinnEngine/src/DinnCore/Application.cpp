@@ -5,7 +5,7 @@ namespace Dinn
 	{
 		isRunning = false;
 		maxFrameRate = 60;
-		lastFrame = 0;
+		lastFrame = Time::Now();
 	}
 
 	Application::~Application()
