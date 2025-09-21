@@ -419,3 +419,10 @@ FodyWeavers.xsd
 bin-int
 *.vcxproj.filters
 bin
+CMakeFiles
+CMakeCache.txt
+ZERO_CHECK.vcxproj
+ALL_BUILD.vcxproj
+*.vcxproj
+DinnEngine.sln
+cmake_install.cmake
