@@ -10,6 +10,8 @@ namespace Dinn
 		isRunning = false;
 		maxFrameRate = 60;
 		lastFrame = Time::Now();
+
+		window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -22,14 +24,19 @@ namespace Dinn
 
 		while (isRunning)
 		{
+
 			double currentTime = Time::Now();
 			double deltaTime = currentTime - lastFrame;
 			lastFrame = currentTime;
 
 			if (deltaTime > 0.0)
 			{
+				glClearColor(0, 1, 1, 1);
+				glClear(GL_COLOR_BUFFER_BIT);
+
+				window->Update();
 				//simulate processing
-				std::this_thread::sleep_for(std::chrono::microseconds(100));
+				//std::this_thread::sleep_for(std::chrono::microseconds(100));
 				// TODO: process input
 				// TODO: update objects
 				// TODO: render

@@ -3,6 +3,8 @@
 #include "Time.h"
 #include <chrono>
 #include <thread>
+#include "Window.h"
+#include "GLFW/glfw3.h"
 
 namespace Dinn
 {
@@ -19,6 +21,8 @@ namespace Dinn
 		bool isRunning;
 		unsigned int maxFrameRate;
 		double lastFrame;
+
+		std::unique_ptr<Window> window;
 	};
 
 	// To be defined in client
