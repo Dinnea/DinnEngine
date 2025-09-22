@@ -1,3 +1,6 @@
+#ENGINE CMAKE
+set (DEPENDENCIES ${CMAKE_CURRENT_SOURCE_DIR}/dependencies)
+
 #---------------------------------
 # Define engine sources
 #---------------------------------
@@ -38,4 +41,13 @@ set_target_properties(${TARGET_ENGINE} PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_ENGINE}"
   LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_ENGINE}"
   ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin-int/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_ENGINE}"
+)
+
+#---------------------------------
+# Copy the dll to the .exe file's location (unchanged)
+#---------------------------------
+add_custom_command(TARGET DinnEngine POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+          $<TARGET_FILE:DinnEngine>
+          $<TARGET_FILE_DIR:${TARGET_GAME}>
 )

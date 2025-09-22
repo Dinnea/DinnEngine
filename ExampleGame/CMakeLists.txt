@@ -1,3 +1,5 @@
+#GAME CMAKE
+
 #---------------------------------
 # Define game sources
 #---------------------------------
@@ -35,14 +37,3 @@ set_target_properties(${TARGET_GAME} PROPERTIES
   LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_GAME}"
   ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin-int/$<CONFIG>${PLATFORM_SUFFIX}/${TARGET_GAME}"
 )
-
-#---------------------------------
-# Copy the dll to the .exe file's location
-#---------------------------------
-if(WIN32) #only windows supported
-    add_custom_command(TARGET ExampleGame POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "$<TARGET_FILE:DinnEngine>"
-        "$<TARGET_FILE_DIR:ExampleGame>/DinnEngine.dll"
-        )
-endif()
