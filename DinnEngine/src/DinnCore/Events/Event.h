@@ -2,6 +2,7 @@
 #include "DinnCore/Core.h"
 #include <functional>
 #include <string>
+#include <sstream>
 
 namespace Dinn
 {
@@ -19,6 +20,7 @@ namespace Dinn
 		EventFlagKeyboard = BIT(1),
 		EventFlagMouse = BIT(2),
 		EventFlagMouseButton = BIT(3),
+		EventFlagApplication BIT(4),
 	};
 
 	class DINN_API Event
