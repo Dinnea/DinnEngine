@@ -1,7 +1,16 @@
 #ENGINE CMAKE
 set (DEPENDENCIES ${CMAKE_CURRENT_SOURCE_DIR}/dependencies)
 
-set(GLFW_ROOT "${CMAKE_SOURCE_DIR}/${TARGET_ENGINE}/dependencies/glfw")
+set(GLFW_ROOT "${DEPENDENCIES}/glfw")
+set(GLAD_ROOT "${DEPENDENCIES}/glad")
+
+if (EXISTS "${GLAD_ROOT}/src/glad.c")
+  set(GLAD_SRC "${GLAD_ROOT}/src/glad.c")
+elseif (EXISTS "${GLAD_ROOT}/src/gl.c")
+  set(GLAD_SRC "${GLAD_ROOT}/src/gl.c")
+else()
+  message(FATAL_ERROR "GLAD source not found under ${GLAD_ROOT}/src")
+endif()
 #---------------------------------
 # Define engine sources
 #---------------------------------
@@ -15,17 +24,22 @@ file(GLOB_RECURSE DN_SRC CONFIGURE_DEPENDS
 # Libraries to include
 #---------------------------------
 add_library(${TARGET_ENGINE} SHARED ${DN_SRC})
+
 add_library(glfw3 STATIC IMPORTED GLOBAL)
 set_target_properties(glfw3 PROPERTIES
   IMPORTED_LOCATION             "${GLFW_ROOT}/lib/glfw3_mt.lib"
   INTERFACE_INCLUDE_DIRECTORIES "${GLFW_ROOT}/include"
 )
 
+add_library(glad STATIC "${GLAD_SRC}")
+target_include_directories(glad PUBLIC "${GLAD_ROOT}/include")
+
 target_include_directories(DinnEngine
   PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
-    "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/spdlog/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/dependecies/glfw/include"
+    "${DEPENDENCIES}/spdlog/include"
+    "${GLFW_ROOT}/include"
+    "${GLAD_ROOT}/include"
 )
 
 target_precompile_headers(DinnEngine
@@ -37,7 +51,7 @@ target_link_libraries(glfw3 INTERFACE
   opengl32 user32 gdi32 shell32 ole32 uuid
 )
 
-target_link_libraries(${TARGET_ENGINE} PUBLIC glfw3)
+target_link_libraries(${TARGET_ENGINE} PUBLIC glfw3 glad)
 
 #---------------------------------
 # Engine-specific defines
@@ -61,7 +75,7 @@ set_target_properties(${TARGET_ENGINE} PROPERTIES
 )
 
 #---------------------------------
-# Copy the dll to the .exe file's location (unchanged)
+# Copy the dll to the .exe file's location
 #---------------------------------
 add_custom_command(TARGET DinnEngine POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_if_different

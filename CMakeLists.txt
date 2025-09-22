@@ -5,10 +5,13 @@
 #---------------------------------
 
 cmake_minimum_required(VERSION 3.21)
-project(DinnEngine LANGUAGES CXX) 
+project(DinnEngine LANGUAGES C CXX) 
 
 set (CMAKE_CXX_STANDARD 17)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
 set(PLATFORM_SUFFIX "-windows-x86_64")
 set(TARGET_ENGINE "DinnEngine")
