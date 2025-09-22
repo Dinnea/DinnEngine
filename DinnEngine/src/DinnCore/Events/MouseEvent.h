@@ -1,0 +1,95 @@
+#pragma once
+#include "DinnCore/Core.h"
+#include "DinnCore/Events/Event.h"
+#include<sstream>
+
+namespace Dinn
+{
+	class DINN_API MouseMovedEvent : public Event
+	{
+	public:
+
+		MouseMovedEvent(const float x, const float y) : mouseX(x), mouseY(y) {}
+
+		float GetX() const { return mouseX; }
+		float GetY() const { return mouseY; }
+
+		std::string ToString() const override
+		{
+			std::stringstream str;
+			str << "MouseMovedEvent: " << mouseX << ", " << mouseY;
+			return str.str();
+		}
+
+		EVENT_CLASS_TYPE(MouseMove) EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
+
+	private:
+		float mouseX, mouseY;
+	};
+
+	class DINN_API MouseScrolledEvent : public Event
+	{
+	public:
+		MouseScrolledEvent(const float x, const float y) : xOffset(x), yOffset(y) {}
+
+		float GetXOffset() const { return xOffset; }
+		float GetYOffset() const { return yOffset; }
+
+		std::string ToString() const override
+		{
+			std::stringstream str;
+			str << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
+			return str.str();
+		}
+
+		EVENT_CLASS_TYPE(MouseScroll) EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
+
+	private:
+		float xOffset, yOffset;
+	};
+
+	class DINN_API MouseButtonEvent : public Event
+	{
+	public:
+
+		int GetMouseButton() const { return button; }
+
+		EVENT_CLASS_FLAGS(EventFlagMouse | EventFlagInput | EventFlagMouseButton)
+
+
+	protected:
+		MouseButtonEvent(int _button) : button(_button) {}
+
+		int button;
+	};
+
+	class DINN_API MouseButtonPressedEvent : public MouseButtonEvent
+	{
+	public:
+		MouseButtonPressedEvent(const int _button) : MouseButtonEvent(_button) {}
+
+		std::string ToString() const override
+		{
+			std::stringstream str;
+			str << "MouseButtonPressedEvent: " << button;
+			return str.str();
+		}
+
+		EVENT_CLASS_TYPE(MousePress)
+	};
+
+	class DINN_API MouseButtonReleasedEvent : public MouseButtonEvent
+	{
+	public:
+		MouseButtonReleasedEvent(const int _button) : MouseButtonEvent(_button) {}
+
+		std::string ToString() const override
+		{
+			std::stringstream str;
+			str << "MouseButtonPressedEvent: " << button;
+			return str.str();
+		}
+
+		EVENT_CLASS_TYPE(MouseRelease)
+	};
+}
