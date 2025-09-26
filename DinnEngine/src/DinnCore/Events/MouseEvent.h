@@ -20,7 +20,8 @@ namespace Dinn
 			return str.str();
 		}
 
-		EVENT_CLASS_TYPE(MouseMove) EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
+		EVENT_CLASS_TYPE(MouseMove) 
+		EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
 
 	private:
 		float mouseX, mouseY;
@@ -41,7 +42,8 @@ namespace Dinn
 			return str.str();
 		}
 
-		EVENT_CLASS_TYPE(MouseScroll) EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
+		EVENT_CLASS_TYPE(MouseScroll) 
+		EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
 
 	private:
 		float xOffset, yOffset;

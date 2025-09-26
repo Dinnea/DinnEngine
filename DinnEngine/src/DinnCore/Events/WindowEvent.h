@@ -20,7 +20,8 @@ namespace Dinn
 			return str.str();
 		}
 
-		EVENT_CLASS_TYPE(WindowResize) EVENT_CLASS_FLAGS(EventFlagApplication)
+		EVENT_CLASS_TYPE(WindowResize) 
+		EVENT_CLASS_FLAGS(EventFlagApplication)
 
 	private:
 		unsigned int width, height;
@@ -30,7 +31,8 @@ namespace Dinn
 	{
 	public:
 
-		EVENT_CLASS_TYPE(WindowClose) EVENT_CLASS_FLAGS(EventFlagApplication)
+		EVENT_CLASS_TYPE(WindowClose) 
+		EVENT_CLASS_FLAGS(EventFlagApplication)
 
 	};
 }
