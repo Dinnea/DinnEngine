@@ -426,3 +426,4 @@ ALL_BUILD.vcxproj
 *.vcxproj
 DinnEngine.sln
 cmake_install.cmake
+.vscode
