@@ -1,4 +1,6 @@
 #include "Application.h"
+#include "Events/WindowEvent.h"
+
 namespace Dinn
 {
 	Application::Application()

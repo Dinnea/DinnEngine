@@ -1,6 +1,5 @@
 #pragma once
 #include "DinnCore/Core.h"
-#include <functional>
 #include <string>
 #include <sstream>
 
@@ -20,7 +19,7 @@ namespace Dinn
 		EventFlagKeyboard = BIT(1),
 		EventFlagMouse = BIT(2),
 		EventFlagMouseButton = BIT(3),
-		EventFlagApplication BIT(4),
+		EventFlagApplication = BIT(4),
 	};
 
 	class DINN_API Event
@@ -43,4 +42,32 @@ namespace Dinn
 								virtual const char* GetName() const override { return #type; }
 
 #define EVENT_CLASS_FLAGS(flag) virtual int GetEventFlags() const override {return flag;}
+
+	class EventDispatcher
+	{
+		template<typename T>
+		using EventFunc = std::function<bool(T&)>;
+
+	public:
+		EventDispatcher(Event& _event) : event(_event) {}
+
+		template<typename T>
+		bool Dispatch(EventFunc<T> func)
+		{
+			if (event.GetEventType() != T:GetStaticType())
+				return false;
+
+			event.handled = func(*(T)&event);
+			return true;
+		}
+
+	private:
+		Event& event;
+
+	};
+
+	inline std::ostream& operator<<(std::ostream& os, const Event& e)
+	{
+		return os << e.ToString();
+	}
 }
