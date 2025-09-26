@@ -1,5 +1,8 @@
 #include "C:/dev/DinnEngine/DinnEngine/CMakeFiles/DinnEngine.dir/Debug/cmake_pch.hxx"
 #include "WinWindow.h"
+#include "DinnCore/Events/WindowEvent.h"
+#include "DinnCore/Events/KeyEvent.h"
+#include "DinnCore/Events/MouseEvent.h"
 
 static bool GLFWInititialized = false;
 
@@ -56,6 +59,76 @@ void Dinn::WinWindow::Init(const WindowProperties& props)
 	glfwMakeContextCurrent(Window);
 	glfwSetWindowUserPointer(Window, &data);
 	SetVSync(true);
+
+	//Set GLFW callbacks
+
+	glfwSetWindowSizeCallback(Window, [](GLFWwindow* window, int width, int height)
+		{
+			WindowData& data = GrabWindowData(window);
+
+			data.Width = width;
+			data.Height = height;
+
+			WindowResizeEvent event(width, height);
+			data.EventCallback(event);
+		});
+
+	glfwSetWindowCloseCallback(Window, [](GLFWwindow* window)
+		{
+			WindowData& data = GrabWindowData(window);
+
+			WindowCloseEvent event;
+			data.EventCallback(event);
+		});
+
+	glfwSetKeyCallback(Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			WindowData& data = GrabWindowData(window);
+
+			switch (action)
+			{
+			case GLFW_PRESS:
+			{
+				KeyPressEvent event(key, 0);
+				data.EventCallback(event);
+				break;
+			}
+			case GLFW_RELEASE:
+			{
+				KeyReleaseEvent event(key);
+				data.EventCallback(event);
+				break;
+			}
+
+			case GLFW_REPEAT:
+			{
+				KeyPressEvent event(key, 1);
+				data.EventCallback(event);
+				break;
+			}
+			}
+		});
+
+	glfwSetMouseButtonCallback(Window, [](GLFWwindow* window, int button, int action, int mods)
+		{
+			WindowData& data = GrabWindowData(window);
+
+			switch (action)
+			{
+			case GLFW_PRESS:
+			{
+				MouseButtonPressEvent event(button);
+				data.EventCallback(event);
+				break;
+			}
+			case GLFW_RELEASE:
+			{
+				MouseButtonReleaseEvent event(button);
+				data.EventCallback(event);
+				break;
+			}
+			}
+		});
 }
 
 void Dinn::WinWindow::Shutdown()

@@ -12,6 +12,8 @@ namespace Dinn
 		lastFrame = Time::Now();
 
 		window = std::unique_ptr<Window>(Window::Create());
+
+		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 	}
 
 	Application::~Application()
@@ -57,5 +59,9 @@ namespace Dinn
 	void Application::SetTargetFrameRate(unsigned int frameRate)
 	{
 		this->maxFrameRate = frameRate;
+	}
+	void Application::OnEvent(Event& event)
+	{
+		DN_CORE_INFO("{0}", event.ToString());
 	}
 }

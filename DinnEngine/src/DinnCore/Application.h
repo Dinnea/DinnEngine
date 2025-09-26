@@ -17,6 +17,8 @@ namespace Dinn
 		void Run();
 		void SetTargetFrameRate(unsigned int frameRate);
 
+		void OnEvent(Event& event);
+
 	private:
 		bool isRunning;
 		unsigned int maxFrameRate;

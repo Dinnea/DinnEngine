@@ -26,7 +26,7 @@ namespace Dinn
 		unsigned int width, height;
 	};
 
-	class DINN_API WindowClose : public Event
+	class DINN_API WindowCloseEvent : public Event
 	{
 	public:
 
