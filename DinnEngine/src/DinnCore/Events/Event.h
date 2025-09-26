@@ -1,7 +1,6 @@
 #pragma once
 #include "DinnCore/Core.h"
-#include <string>
-#include <sstream>
+#include "dnpch.h"
 
 namespace Dinn
 {

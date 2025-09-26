@@ -4,7 +4,6 @@
 
 #include "DinnCore/Application.h"
 #include "DinnCore/Time.h"
-#include "DinnCore/Log.h"
 
 //events
 
