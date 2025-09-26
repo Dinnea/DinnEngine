@@ -1,4 +1,6 @@
+#include "dnpch.h"
 #include "Time.h"
+
 namespace Dinn
 {
 	double Time::deltaTime = 0.0;

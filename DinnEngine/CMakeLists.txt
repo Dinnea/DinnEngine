@@ -22,6 +22,10 @@ target_include_directories(DinnEngine
     "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/spdlog/include"
 )
 
+target_precompile_headers(DinnEngine
+    PRIVATE
+        "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.h>"
+)
 #---------------------------------
 # Engine-specific defines
 #---------------------------------

@@ -1,7 +1,6 @@
 #pragma once
 #include "Core.h"
 #include "Time.h"
-#include "Log.h"
 #include <chrono>
 #include <thread>
 
