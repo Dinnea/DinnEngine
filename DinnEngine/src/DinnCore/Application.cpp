@@ -1,7 +1,6 @@
 #include "dnpch.h"
 
 #include "Application.h"
-#include "Events/WindowEvent.h"
 
 namespace Dinn
 {
@@ -62,6 +61,14 @@ namespace Dinn
 	}
 	void Application::OnEvent(Event& event)
 	{
-		DN_CORE_INFO("{0}", event.ToString());
+		EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+
+		DN_CORE_TRACE("{0}", event.ToString());
+	}
+	bool Application::OnWindowClose(WindowCloseEvent& event)
+	{
+		isRunning = false;
+		return true;
 	}
 }

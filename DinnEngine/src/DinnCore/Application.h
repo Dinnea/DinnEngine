@@ -5,6 +5,7 @@
 #include <thread>
 #include "Window.h"
 #include "GLFW/glfw3.h"
+#include "Events/WindowEvent.h"
 
 namespace Dinn
 {
@@ -20,6 +21,8 @@ namespace Dinn
 		void OnEvent(Event& event);
 
 	private:
+		bool OnWindowClose(WindowCloseEvent& event);
+
 		bool isRunning;
 		unsigned int maxFrameRate;
 		double lastFrame;
