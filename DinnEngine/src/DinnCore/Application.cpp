@@ -52,7 +52,7 @@ namespace Dinn
 				std::this_thread::sleep_for(sleepDuration);
 				deltaTime = targetFrameTime;
 			}
-			DN_CORE_INFO("Step at {0} delta time", deltaTime);
+			//DN_CORE_INFO("Step at {0} delta time", deltaTime);
 			Time::SetDeltaTime(deltaTime);
 		}
 	}

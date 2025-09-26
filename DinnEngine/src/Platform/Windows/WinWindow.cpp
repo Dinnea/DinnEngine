@@ -6,6 +6,11 @@
 
 static bool GLFWInititialized = false;
 
+static void GLFWErrorCallback(int error, const char* description)
+{
+	DN_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
+}
+
 Dinn::Window* Dinn::Window::Create(const WindowProperties& props)
 {
 	return new WinWindow(props);
@@ -39,7 +44,6 @@ bool Dinn::WinWindow::IsVSync() const
 	return data.VSync;
 }
 
-
 void Dinn::WinWindow::Init(const WindowProperties& props)
 {
 	data.Title = props.Title;
@@ -53,6 +57,8 @@ void Dinn::WinWindow::Init(const WindowProperties& props)
 		DN_CORE_ASSERT(success, "Could not initialize GLFW!");
 
 		GLFWInititialized = true;
+
+		glfwSetErrorCallback(GLFWErrorCallback);
 	}
 
 	Window = glfwCreateWindow((int)props.Width, (int)props.Height, data.Title.c_str(), nullptr, nullptr);
@@ -128,6 +134,22 @@ void Dinn::WinWindow::Init(const WindowProperties& props)
 				break;
 			}
 			}
+		});
+
+	glfwSetScrollCallback(Window, [](GLFWwindow* window, double xoffset, double yoffset)
+		{
+			WindowData& data = GrabWindowData(window);
+
+			MouseScrolledEvent event((float)xoffset, (float)yoffset);
+			data.EventCallback(event);
+		});
+
+	glfwSetCursorPosCallback(Window, [](GLFWwindow* window, double xpos, double ypos)
+		{
+			WindowData& data = GrabWindowData(window);
+
+			MouseMovedEvent event((float)xpos, (float)ypos);
+			data.EventCallback(event);
 		});
 }
 
