@@ -31,8 +31,6 @@ namespace Dinn
 		virtual std::string ToString() const { return GetName(); }
 
 		inline bool HasFlag(EventFlag flag) const { return GetEventFlags() & flag; }
-
-	protected:
 		bool handled = false;
 	};
 
@@ -53,10 +51,10 @@ namespace Dinn
 		template<typename T>
 		bool Dispatch(EventFunc<T> func)
 		{
-			if (event.GetEventType() != T:GetStaticType())
+			if (event.GetEventType() != T::GetStaticType())
 				return false;
 
-			event.handled = func(*(T)&event);
+			event.handled |= func(static_cast<T&>(event));
 			return true;
 		}
 

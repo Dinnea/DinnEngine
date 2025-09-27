@@ -38,7 +38,7 @@ namespace Dinn
 	class DINN_API KeyReleaseEvent : public KeyEvent
 	{
 	public:
-		KeyReleaseEvent(int _keyCode, bool _repeated) : KeyEvent(_keyCode) {}
+		KeyReleaseEvent(int _keyCode) : KeyEvent(_keyCode) {}
 
 		std::string ToString() const override
 		{

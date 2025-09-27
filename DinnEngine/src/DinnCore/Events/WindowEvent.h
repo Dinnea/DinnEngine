@@ -20,17 +20,19 @@ namespace Dinn
 			return str.str();
 		}
 
-		EVENT_CLASS_TYPE(WindowResize) EVENT_CLASS_FLAGS(EventFlagApplication)
+		EVENT_CLASS_TYPE(WindowResize) 
+		EVENT_CLASS_FLAGS(EventFlagApplication)
 
 	private:
 		unsigned int width, height;
 	};
 
-	class DINN_API WindowClose : public Event
+	class DINN_API WindowCloseEvent : public Event
 	{
 	public:
 
-		EVENT_CLASS_TYPE(WindowClose) EVENT_CLASS_FLAGS(EventFlagApplication)
+		EVENT_CLASS_TYPE(WindowClose) 
+		EVENT_CLASS_FLAGS(EventFlagApplication)
 
 	};
 }

@@ -20,7 +20,8 @@ namespace Dinn
 			return str.str();
 		}
 
-		EVENT_CLASS_TYPE(MouseMove) EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
+		EVENT_CLASS_TYPE(MouseMove) 
+		EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
 
 	private:
 		float mouseX, mouseY;
@@ -41,7 +42,8 @@ namespace Dinn
 			return str.str();
 		}
 
-		EVENT_CLASS_TYPE(MouseScroll) EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
+		EVENT_CLASS_TYPE(MouseScroll) 
+		EVENT_CLASS_FLAGS(EventFlagInput | EventFlagMouse)
 
 	private:
 		float xOffset, yOffset;
@@ -62,10 +64,10 @@ namespace Dinn
 		int button;
 	};
 
-	class DINN_API MouseButtonPressedEvent : public MouseButtonEvent
+	class DINN_API MouseButtonPressEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(const int _button) : MouseButtonEvent(_button) {}
+		MouseButtonPressEvent(const int _button) : MouseButtonEvent(_button) {}
 
 		std::string ToString() const override
 		{
@@ -77,10 +79,10 @@ namespace Dinn
 		EVENT_CLASS_TYPE(MousePress)
 	};
 
-	class DINN_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class DINN_API MouseButtonReleaseEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(const int _button) : MouseButtonEvent(_button) {}
+		MouseButtonReleaseEvent(const int _button) : MouseButtonEvent(_button) {}
 
 		std::string ToString() const override
 		{
