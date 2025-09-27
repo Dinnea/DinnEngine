@@ -53,26 +53,26 @@ namespace Dinn
 	{
 	public:
 
-		int GetMouseButton() const { return button; }
+		Input::Mouse GetMouseButton() const { return button; }
 
 		EVENT_CLASS_FLAGS(EventFlagMouse | EventFlagInput | EventFlagMouseButton)
 
 
 	protected:
-		MouseButtonEvent(int _button) : button(_button) {}
+		MouseButtonEvent(const Input::Mouse _button) : button(_button) {}
 
-		int button;
+		Input::Mouse button;
 	};
 
 	class DINN_API MouseButtonPressEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressEvent(const int _button) : MouseButtonEvent(_button) {}
+		MouseButtonPressEvent(const Input::Mouse _button) : MouseButtonEvent(_button) {}
 
 		std::string ToString() const override
 		{
 			std::stringstream str;
-			str << "MouseButtonPressedEvent: " << button;
+			str << "MouseButtonPressedEvent: " << Input::ToString(button);
 			return str.str();
 		}
 
@@ -82,12 +82,12 @@ namespace Dinn
 	class DINN_API MouseButtonReleaseEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleaseEvent(const int _button) : MouseButtonEvent(_button) {}
+		MouseButtonReleaseEvent(const Input::Mouse _button) : MouseButtonEvent(_button) {}
 
 		std::string ToString() const override
 		{
 			std::stringstream str;
-			str << "MouseButtonPressedEvent: " << button;
+			str << "MouseButtonPressedEvent: " << Input::ToString(button);
 			return str.str();
 		}
 

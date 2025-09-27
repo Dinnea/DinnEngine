@@ -91,24 +91,26 @@ void Dinn::WinWindow::Init(const WindowProperties& props)
 		{
 			WindowData& data = GrabWindowData(window);
 
+			Input::Keyboard keyCode = static_cast<Input::Keyboard>(key);
+
 			switch (action)
 			{
 			case GLFW_PRESS:
 			{
-				KeyPressEvent event(key, 0);
+				KeyPressEvent event(keyCode, 0);
 				data.EventCallback(event);
 				break;
 			}
 			case GLFW_RELEASE:
 			{
-				KeyReleaseEvent event(key);
+				KeyReleaseEvent event(keyCode);
 				data.EventCallback(event);
 				break;
 			}
 
 			case GLFW_REPEAT:
 			{
-				KeyPressEvent event(key, 1);
+				KeyPressEvent event(keyCode, 1);
 				data.EventCallback(event);
 				break;
 			}
@@ -119,17 +121,19 @@ void Dinn::WinWindow::Init(const WindowProperties& props)
 		{
 			WindowData& data = GrabWindowData(window);
 
+			Input::Mouse buttonCode = static_cast<Input::Mouse>(button);
+
 			switch (action)
 			{
 			case GLFW_PRESS:
 			{
-				MouseButtonPressEvent event(button);
+				MouseButtonPressEvent event(buttonCode);
 				data.EventCallback(event);
 				break;
 			}
 			case GLFW_RELEASE:
 			{
-				MouseButtonReleaseEvent event(button);
+				MouseButtonReleaseEvent event(buttonCode);
 				data.EventCallback(event);
 				break;
 			}
