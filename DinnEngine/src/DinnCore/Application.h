@@ -37,4 +37,3 @@ namespace Dinn
 	// To be defined in client
 	Application* CreateApplication();
 }
-

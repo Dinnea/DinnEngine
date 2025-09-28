@@ -34,6 +34,3 @@ namespace Dinn
 #define DN_WARN(...)	::Dinn::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define DN_ERROR(...)	::Dinn::Log::GetClientLogger()->error(__VA_ARGS__)
 #define DN_FATAL(...)	::Dinn::Log::GetClientLogger()->fatal(__VA_ARGS__)
-
-
-

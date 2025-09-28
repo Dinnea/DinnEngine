@@ -21,7 +21,6 @@ namespace Dinn
 		enum class Mouse : int;
 	}
 
-
 	class Window
 	{
 	public:
@@ -43,6 +42,4 @@ namespace Dinn
 
 		static Window* Create(const WindowProperties& props = WindowProperties());
 	};
-
 }
-
