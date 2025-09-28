@@ -1,4 +1,5 @@
 #pragma once
+#include "Dinn.h"
 #include "DinnCore/Window.h"
 #include "GLFW/glfw3.h"
 
@@ -19,6 +20,9 @@ namespace Dinn
 
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
+
+		bool IsKeyDown(Input::Keyboard key) override;
+		bool IsMouseDown(Input::Mouse key) override;
 
 	private:
 		virtual void Init(const WindowProperties& props);

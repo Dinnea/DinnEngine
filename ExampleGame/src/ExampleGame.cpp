@@ -5,7 +5,7 @@ class Example : public Dinn::Application
 public:
 	Example()
 	{
-		SetTargetFrameRate(60);
+		SetTargetFrameRate(60); 
 	}
 
 	~Example()

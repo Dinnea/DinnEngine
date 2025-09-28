@@ -1,4 +1,6 @@
 #pragma once
+#include <GLFW/glfw3.h>
+#include "Application.h"
 
 namespace Dinn::Input
 {
@@ -269,7 +271,10 @@ namespace Dinn::Input
 
     inline static bool GetKeyDown(const Keyboard key)
     {
-        //Application::GetWindow();
-        return false;
+        return ::Dinn::Application::Get().GetWindow().IsKeyDown(key);
+    }
+    inline static bool GetKeyDown(const Mouse btn)
+    {
+        return ::Dinn::Application::Get().GetWindow().IsMouseDown(btn);
     }
 }

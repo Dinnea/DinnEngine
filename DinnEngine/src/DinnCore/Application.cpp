@@ -1,11 +1,14 @@
 #include "dnpch.h"
-
 #include "Application.h"
 
 namespace Dinn
 {
+	Application* Application::instance = nullptr;
+
 	Application::Application()
 	{
+		instance = this;
+
 		isRunning = false;
 		maxFrameRate = 60;
 		lastFrame = Time::Now();
@@ -17,6 +20,7 @@ namespace Dinn
 
 	Application::~Application()
 	{
+		instance = nullptr;
 	}
 
 	void Application::Run()
@@ -66,6 +70,7 @@ namespace Dinn
 
 		DN_CORE_TRACE("{0}", event.ToString());
 	}
+
 	bool Application::OnWindowClose(WindowCloseEvent& event)
 	{
 		isRunning = false;

@@ -1,8 +1,5 @@
 #include "C:/dev/DinnEngine/DinnEngine/CMakeFiles/DinnEngine.dir/Debug/cmake_pch.hxx"
 #include "WinWindow.h"
-#include "DinnCore/Events/WindowEvent.h"
-#include "DinnCore/Events/KeyEvent.h"
-#include "DinnCore/Events/MouseEvent.h"
 
 static bool GLFWInititialized = false;
 
@@ -30,6 +27,9 @@ void Dinn::WinWindow::Update()
 {
 	glfwPollEvents();
 	glfwSwapBuffers(Window);
+
+	if (Input::GetKeyDown(Input::Keyboard::SPACE))
+		DN_CORE_INFO("Space pressed");
 }
 
 void Dinn::WinWindow::SetVSync(bool enabled)
@@ -42,6 +42,16 @@ void Dinn::WinWindow::SetVSync(bool enabled)
 bool Dinn::WinWindow::IsVSync() const
 {
 	return data.VSync;
+}
+
+bool Dinn::WinWindow::IsKeyDown(Input::Keyboard key)
+{
+	return glfwGetKey(Window, static_cast<int>(key)) == GLFW_PRESS;
+}
+
+bool Dinn::WinWindow::IsMouseDown(Input::Mouse btn)
+{
+	return glfwGetKey(Window, static_cast<int>(btn)) == GLFW_PRESS;
 }
 
 void Dinn::WinWindow::Init(const WindowProperties& props)
