@@ -4,7 +4,6 @@
 #include "DinnCore/Time.h"
 
 // ------------- Events ------------------- //
-
 #include "DinnCore/Events/Events.h"
 
 // ------------- Input ------------------- //
@@ -15,7 +14,6 @@
 #ifdef DN_PLATFORM_WINDOWS
 #include "Platform/Windows/WinWindow.h"
 #endif // DN_PLATFORM_WINDOWS
-
 
 #include "stdio.h"
 
