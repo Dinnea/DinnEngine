@@ -16,6 +16,11 @@ namespace Dinn
 		}
 	};
 
+	namespace Input {
+		enum class Keyboard : int;
+		enum class Mouse : int;
+	}
+
 	class Window
 	{
 	public:
@@ -32,8 +37,9 @@ namespace Dinn
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
+		virtual bool IsKeyDown(Input::Keyboard key) = 0;
+		virtual bool IsMouseDown(Input::Mouse btn)  = 0;
+
 		static Window* Create(const WindowProperties& props = WindowProperties());
 	};
-
 }
-

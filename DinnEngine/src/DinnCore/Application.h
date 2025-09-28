@@ -20,6 +20,9 @@ namespace Dinn
 
 		void OnEvent(Event& event);
 
+		static Application& Get() noexcept { return *instance; }
+		Window& GetWindow() noexcept { return *window; }
+
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
 
@@ -27,10 +30,10 @@ namespace Dinn
 		unsigned int maxFrameRate;
 		double lastFrame;
 
+		static Application* instance;
 		std::unique_ptr<Window> window;
 	};
 
 	// To be defined in client
 	Application* CreateApplication();
 }
-
