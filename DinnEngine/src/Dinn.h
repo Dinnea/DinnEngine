@@ -12,6 +12,7 @@
 #include "DinnCore/Events/KeyEvent.h"
 #include "DinnCore/Events/MouseEvent.h"
 #include "DinnCore/Events/WindowEvent.h"
+#include "DinnCore/Input.h"
 
 #include "stdio.h"
 

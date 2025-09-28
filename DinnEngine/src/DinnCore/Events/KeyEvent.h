@@ -1,31 +1,36 @@
 #pragma once
 #include "DinnCore/Core.h"
 #include "DinnCore/Events/Event.h"
+#include "KeyCodes.h"
 
 namespace Dinn
 {
 	class DINN_API KeyEvent : public Event
 	{
 	public:
-		int GetKeyCode() const { return keyCode; }
+		Input::Keyboard GetKeyCode() const { return keyCode; }
 
 		EVENT_CLASS_FLAGS(EventFlagKeyboard | EventFlagInput)
 
 	protected:
-		KeyEvent(int _keyCode) : keyCode(_keyCode) {}
-		int keyCode;
+		KeyEvent(const Input::Keyboard _keyCode) : keyCode(_keyCode) {}
+		Input::Keyboard keyCode;
+
+		Input::Keyboard key;
 	};
 
 	class DINN_API KeyPressEvent : public KeyEvent
 	{
 	public:
-		KeyPressEvent(int _keyCode, bool _repeated) : KeyEvent(_keyCode), repeated(_repeated) {}
+		KeyPressEvent(const Input::Keyboard _keyCode, bool _repeated) : KeyEvent(_keyCode), repeated(_repeated) {}
 		bool IsRepeated() const { return repeated; }
 
 		std::string ToString() const override
 		{
+
+			Input::ToString(keyCode);
 			std::stringstream str;
-			str << "KeyPressedEvent: " << keyCode << ", repeated? " << repeated;
+			str << "KeyPressedEvent: " << Input::ToString(keyCode) << ", repeated? " << repeated;
 			return str.str();
 		}
 
@@ -38,12 +43,12 @@ namespace Dinn
 	class DINN_API KeyReleaseEvent : public KeyEvent
 	{
 	public:
-		KeyReleaseEvent(int _keyCode) : KeyEvent(_keyCode) {}
+		KeyReleaseEvent(const Input::Keyboard _keyCode) : KeyEvent(_keyCode) {}
 
 		std::string ToString() const override
 		{
 			std::stringstream str;
-			str << "KeyReleasedEvent: " << keyCode;
+			str << "KeyReleasedEvent: " << Input::ToString(keyCode);
 			return str.str();
 		}
 
