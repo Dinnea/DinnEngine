@@ -5,10 +5,7 @@
 
 // ------------- Events ------------------- //
 
-#include "DinnCore/Events/Event.h"
-#include "DinnCore/Events/KeyEvent.h"
-#include "DinnCore/Events/MouseEvent.h"
-#include "DinnCore/Events/WindowEvent.h"
+#include "DinnCore/Events/Events.h"
 
 // ------------- Input ------------------- //
 #include "DinnCore/Input.h"

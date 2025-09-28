@@ -1,6 +1,6 @@
 #pragma once
-#include "Dinn.h"
 #include "DinnCore/Window.h"
+#include "DinnCore/Events/Events.h"
 #include "GLFW/glfw3.h"
 
 namespace Dinn
