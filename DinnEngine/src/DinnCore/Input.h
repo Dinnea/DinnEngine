@@ -267,4 +267,9 @@ namespace Dinn::Input
         }
     }
 
+    inline static bool GetKeyDown(const Keyboard key)
+    {
+        //Application::GetWindow();
+        return false;
+    }
 }
