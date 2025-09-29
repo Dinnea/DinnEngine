@@ -1,5 +1,6 @@
 #include "dnpch.h"
 #include "Application.h"
+#include "glfw_glad.h"
 
 namespace Dinn
 {

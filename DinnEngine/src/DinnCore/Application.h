@@ -1,11 +1,10 @@
 #pragma once
 #include "Core.h"
+#include "Events/WindowEvent.h"
 #include "Time.h"
+#include "Window.h"
 #include <chrono>
 #include <thread>
-#include "Window.h"
-#include "GLFW/glfw3.h"
-#include "Events/WindowEvent.h"
 
 namespace Dinn
 {
