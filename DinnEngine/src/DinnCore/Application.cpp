@@ -37,9 +37,6 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
-				glClearColor(0, 1, 1, 1);
-				glClear(GL_COLOR_BUFFER_BIT);
-
 				window->Update();
 				//simulate processing
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));
