@@ -1,6 +1,7 @@
 #include "dnpch.h"
 #include "Application.h"
 #include "glfw_glad.h"
+#include "Rendering/TestRenderer.h"
 
 namespace Dinn
 {
@@ -28,6 +29,8 @@ namespace Dinn
 	{
 		isRunning = true;
 
+		TestRenderer test;
+
 		while (isRunning)
 		{
 
@@ -37,7 +40,11 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
+				test.Draw(0, 0);
+
 				window->Update();
+
+
 				//simulate processing
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));
 				// TODO: process input
@@ -57,6 +64,7 @@ namespace Dinn
 			Time::SetDeltaTime(deltaTime);
 		}
 	}
+
 	void Application::SetTargetFrameRate(unsigned int frameRate)
 	{
 		this->maxFrameRate = frameRate;
@@ -66,7 +74,7 @@ namespace Dinn
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 
-		DN_CORE_TRACE("{0}", event.ToString());
+		//DN_CORE_TRACE("{0}", event.ToString());
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& event)
