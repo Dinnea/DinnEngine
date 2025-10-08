@@ -1,4 +1,4 @@
-#include "C:/dev/DinnEngine/DinnEngine/CMakeFiles/DinnEngine.dir/Debug/cmake_pch.hxx"
+#include "dnpch.h"
 #include "TestRenderer.h"
 #include "glad/glad.h"
 

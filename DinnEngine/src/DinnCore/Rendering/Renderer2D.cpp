@@ -1,2 +1,2 @@
-#include "C:/dev/DinnEngine/DinnEngine/CMakeFiles/DinnEngine.dir/Debug/cmake_pch.hxx"
+#include "dnpch.h"
 #include "Renderer2D.h"

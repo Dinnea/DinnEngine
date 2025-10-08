@@ -1,4 +1,4 @@
-#include "C:/dev/DinnEngine/DinnEngine/CMakeFiles/DinnEngine.dir/Debug/cmake_pch.hxx"
+#include "dnpch.h"
 #include "WinWindow.h"
 
 #include "DinnCore/glfw_glad.h"

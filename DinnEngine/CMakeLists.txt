@@ -42,11 +42,29 @@ target_include_directories(DinnEngine
     "${GLAD_ROOT}/include"
 )
 
-target_precompile_headers(DinnEngine
-    PRIVATE
-        "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.h>"
-)
+# MSVC classic PCH (no target_precompile_headers)
+set(PCH_HEADER dnpch.h)
+set(PCH_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.cpp)
+set(PCH_NAME   DinnEngine.pch)   # name is up to you
 
+target_sources(DinnEngine PRIVATE ${PCH_SOURCE})
+
+
+  # Create the PCH from dnpch.cpp
+  set_source_files_properties(${PCH_SOURCE} PROPERTIES
+    COMPILE_OPTIONS "/Yc${PCH_HEADER};/Fp\"$(IntDir)${PCH_NAME}\""
+  )
+
+  # Use the PCH for all other sources + (optional) force-include
+  target_compile_options(DinnEngine PRIVATE
+    "/Yu${PCH_HEADER}"
+    "/Fp\"$(IntDir)${PCH_NAME}\""
+    "/FI${PCH_HEADER}"
+  )
+
+
+# Optional: also force-include so you don't have to write #include "dnpch.h" anywhere
+target_compile_options(DinnEngine PRIVATE /FI"dnpch.h")
 target_link_libraries(glfw3 INTERFACE
   opengl32 user32 gdi32 shell32 ole32 uuid
 )
