@@ -42,29 +42,29 @@ target_include_directories(DinnEngine
     "${GLAD_ROOT}/include"
 )
 
-# MSVC classic PCH (no target_precompile_headers)
-set(PCH_HEADER dnpch.h)
-set(PCH_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.cpp)
-set(PCH_NAME   DinnEngine.pch)   # name is up to you
+# --- MSVC-only classic PCH setup (no target_precompile_headers) ---
+if (MSVC)
+  set(PCH_HEADER dnpch.h)
+  set(PCH_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.cpp)
+  set(PCH_NAME   ${TARGET_ENGINE}.pch)  # e.g. DinnEngine.pch
 
-target_sources(DinnEngine PRIVATE ${PCH_SOURCE})
+  target_sources(${TARGET_ENGINE} PRIVATE ${PCH_SOURCE})
 
-
-  # Create the PCH from dnpch.cpp
+  # Create the PCH from dnpch.cpp (NO quotes anywhere)
   set_source_files_properties(${PCH_SOURCE} PROPERTIES
-    COMPILE_OPTIONS "/Yc${PCH_HEADER};/Fp\"$(IntDir)${PCH_NAME}\""
+    COMPILE_OPTIONS "/Yc${PCH_HEADER};/Fp$(IntDir)${PCH_NAME}"
   )
 
-  # Use the PCH for all other sources + (optional) force-include
-  target_compile_options(DinnEngine PRIVATE
+  # All other files: use the PCH (and force-include so you don't add the include manually)
+  target_compile_options(${TARGET_ENGINE} PRIVATE
     "/Yu${PCH_HEADER}"
-    "/Fp\"$(IntDir)${PCH_NAME}\""
+    "/Fp$(IntDir)${PCH_NAME}"
     "/FI${PCH_HEADER}"
   )
+endif()
 
-
-# Optional: also force-include so you don't have to write #include "dnpch.h" anywhere
 target_compile_options(DinnEngine PRIVATE /FI"dnpch.h")
+
 target_link_libraries(glfw3 INTERFACE
   opengl32 user32 gdi32 shell32 ole32 uuid
 )
@@ -95,8 +95,10 @@ set_target_properties(${TARGET_ENGINE} PROPERTIES
 #---------------------------------
 # Copy the dll to the .exe file's location
 #---------------------------------
-add_custom_command(TARGET DinnEngine POST_BUILD
+add_custom_command(TARGET ${TARGET_ENGINE} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${TARGET_GAME}>"
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-          $<TARGET_FILE:DinnEngine>
-          $<TARGET_FILE_DIR:${TARGET_GAME}>
+          "$<TARGET_FILE:${TARGET_ENGINE}>"
+          "$<TARGET_FILE_DIR:${TARGET_GAME}>"
+  VERBATIM
 )
