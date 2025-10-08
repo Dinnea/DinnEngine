@@ -6,7 +6,7 @@ namespace Dinn
 	{
 	public:
 
-		VertexBufferObject(uint32_t* vertices, std::size_t size);
+		VertexBufferObject(float* vertices, std::size_t size);
 		~VertexBufferObject();
 
 		void Bind();

@@ -15,7 +15,7 @@ namespace Dinn
 	void VAO::LinkVBO(VBO& VBO, uint32_t layout)
 	{
 		VBO.Bind();
-		glVertexAttribPointer(layout, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+		glVertexAttribPointer(layout, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(layout);
 		VBO.Unbind();
 	}

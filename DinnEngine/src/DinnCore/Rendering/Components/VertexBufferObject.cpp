@@ -4,7 +4,7 @@
 
 namespace Dinn 
 {
-	VBO::VertexBufferObject(uint32_t* vertices, std::size_t size)
+	VBO::VertexBufferObject(float* vertices, std::size_t size)
 	{
 		glGenBuffers(1, &ID);
 		glBindBuffer(GL_ARRAY_BUFFER, ID);

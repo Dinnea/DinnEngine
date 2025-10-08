@@ -1,7 +1,7 @@
 #include "dnpch.h"
 #include "Application.h"
 #include "glfw_glad.h"
-#include "Rendering/TestRenderer.h"
+#include "Rendering/Renderer2D.h"
 
 namespace Dinn
 {
@@ -14,6 +14,8 @@ namespace Dinn
 		isRunning = false;
 		maxFrameRate = 60;
 		lastFrame = Time::Now();
+
+		renderer = std::make_unique<Renderer2D>();
 
 		window = std::unique_ptr<Window>(Window::Create());
 
@@ -29,8 +31,6 @@ namespace Dinn
 	{
 		isRunning = true;
 
-		TestRenderer test;
-
 		while (isRunning)
 		{
 
@@ -40,7 +40,7 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
-				test.Draw(0, 0);
+				renderer->Draw();
 
 				window->Update();
 

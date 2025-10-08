@@ -5,6 +5,7 @@ namespace Dinn
 {
 	class VertexArrayObject
 	{
+	public:
 		VertexArrayObject();
 		~VertexArrayObject();
 

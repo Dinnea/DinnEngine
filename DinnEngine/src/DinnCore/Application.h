@@ -3,6 +3,7 @@
 #include "Events/WindowEvent.h"
 #include "Time.h"
 #include "Window.h"
+#include "Rendering/Renderer2D.h"
 #include <chrono>
 #include <thread>
 
@@ -28,6 +29,8 @@ namespace Dinn
 		bool isRunning;
 		unsigned int maxFrameRate;
 		double lastFrame;
+
+		std::unique_ptr<Renderer2D> renderer;
 
 		static Application* instance;
 		std::unique_ptr<Window> window;
