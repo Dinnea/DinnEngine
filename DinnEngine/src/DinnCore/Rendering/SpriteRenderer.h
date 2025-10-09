@@ -3,11 +3,11 @@
 
 namespace Dinn
 {
-	class Renderer2D
+	class SpriteRenderer
 	{
     public:
-        Renderer2D();
-        ~Renderer2D();
+        SpriteRenderer();
+        ~SpriteRenderer();
 
         void Initialize();
         void Draw();

@@ -1,20 +1,20 @@
 #include "dnpch.h"
-#include "Renderer2D.h"
+#include "SpriteRenderer.h"
 #include "gtc/matrix_transform.hpp"
 #include "glad/glad.h"
 
 namespace Dinn
 {
-	Renderer2D::Renderer2D()
+	SpriteRenderer::SpriteRenderer()
 	{
 		Initialize();
 	}
-	Renderer2D::~Renderer2D()
+	SpriteRenderer::~SpriteRenderer()
 	{
 		Shutdown();
 	}
 
-	void Renderer2D::Initialize()
+	void SpriteRenderer::Initialize()
 	{
 		float vertices[] =
 		{
@@ -42,7 +42,7 @@ namespace Dinn
 		vao.Unbind();
 	}
 
-	void Renderer2D::Draw()
+	void SpriteRenderer::Draw()
 	{
 		glClearColor(0, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -52,6 +52,7 @@ namespace Dinn
 		//reset model
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(150.0f, 150.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
 		//transformations
 		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 1.0f));
@@ -64,7 +65,7 @@ namespace Dinn
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
 
-	void Renderer2D::Shutdown()
+	void SpriteRenderer::Shutdown()
 	{
 		vao.Delete();
 		vbo->Delete();
@@ -72,7 +73,7 @@ namespace Dinn
 		shader->Delete();
 	}
 
-	void Renderer2D::SetProjection(float width, float height)
+	void SpriteRenderer::SetProjection(float width, float height)
 	{
 		projection = glm::ortho(0.0f, width, 0.0f, height, -1.0f, 1.0f);
 

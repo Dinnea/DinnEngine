@@ -1,7 +1,7 @@
 #include "dnpch.h"
 #include "Application.h"
 #include "glfw_glad.h"
-#include "Rendering/Renderer2D.h"
+#include "Rendering/SpriteRenderer.h"
 
 namespace Dinn
 {
@@ -18,8 +18,8 @@ namespace Dinn
 		window = std::unique_ptr<Window>(Window::Create());
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
-		renderer = std::make_unique<Renderer2D>();
-		renderer->SetProjection(window->GetWidth(), window->GetHeight());
+		spriteRenderer = std::make_unique<SpriteRenderer>();
+		spriteRenderer->SetProjection(window->GetWidth(), window->GetHeight());
 	}
 
 	Application::~Application()
@@ -40,7 +40,7 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
-				renderer->Draw();
+				spriteRenderer->Draw();
 
 				window->Update();
 
@@ -84,7 +84,7 @@ namespace Dinn
 	}
 	bool Application::OnWindowResize(WindowResizeEvent& event)
 	{
-		renderer->SetProjection(event.GetWidth(), event.GetHeight());
+		spriteRenderer->SetProjection(event.GetWidth(), event.GetHeight());
 
 		return true;
 	}
