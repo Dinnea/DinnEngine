@@ -1,5 +1,6 @@
 #pragma once
 #include "RendererComponents.h"
+#include "glm.hpp"
 
 namespace Dinn
 {
@@ -12,6 +13,7 @@ namespace Dinn
         void Initialize();
         void Draw();
         void Shutdown();
+        void SetProjection(float width, float height);
 
     private:
         VAO vao;

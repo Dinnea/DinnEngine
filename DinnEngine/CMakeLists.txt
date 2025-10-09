@@ -37,6 +37,7 @@ target_include_directories(glad PUBLIC "${GLAD_ROOT}/include")
 target_include_directories(DinnEngine
   PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${DEPENDENCIES}/glm"
     "${DEPENDENCIES}/spdlog/include"
     "${GLFW_ROOT}/include"
     "${GLAD_ROOT}/include"
