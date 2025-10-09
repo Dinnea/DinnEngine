@@ -1,6 +1,7 @@
 #include "dnpch.h"
 #include "Renderer2D.h"
-#include <glad/glad.h>
+#include "gtc/matrix_transform.hpp"
+#include "glad/glad.h"
 
 namespace Dinn
 {
@@ -17,11 +18,11 @@ namespace Dinn
 	{
 		float vertices[] =
 		{
-			// pos        // tex
-		   -0.5f, -0.5f,   0.0f, 0.0f,  // bottom-left
-		   -0.5f,  -0.5f,   0.0f, 1.0f,  // bottom-right
-			0.5f,  0.5f,   1.0f, 1.0f,  // top-right
-			-0.5f, 0.5f,   1.0f, 0.0f   // top-left
+			// pos			// tex
+			-0.5f, -0.5f,   0.0f, 0.0f,  // bottom-left
+			0.5f,  -0.5f,   0.0f, 1.0f,  // bottom-right
+			0.5f,  0.5f,	1.0f, 1.0f,  // top-right
+			-0.5f, 0.5f,	1.0f, 0.0f   // top-left
 		};
 
 		GLuint indices[] =
@@ -35,10 +36,9 @@ namespace Dinn
 		shader = std::make_shared<Shader>("Shaders/default.vert", "Shaders/default.frag");
 
 		vao.Bind();
-
+		vao.LinkVBO(*vbo, 0);
 		ebo ->Bind();
 
-		vao.LinkVBO(*vbo, 0);
 		vao.Unbind();
 	}
 
@@ -49,16 +49,33 @@ namespace Dinn
 
 		shader->Activate();
 
+		//reset model
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(150.0f, 150.0f, 0.0f));
+
+		//transformations
+		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 1.0f));
+
+		shader ->SetMatrix4("model", model);
+		shader->SetMatrix4("projection", projection);
+
 		vao.Bind();
 
-		glDrawElements(GL_TRIANGLES, 4, GL_UNSIGNED_INT, 0);
-
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
+
 	void Renderer2D::Shutdown()
 	{
 		vao.Delete();
 		vbo->Delete();
 		ebo->Delete();
 		shader->Delete();
+	}
+
+	void Renderer2D::SetProjection(float width, float height)
+	{
+		projection = glm::ortho(0.0f, width, 0.0f, height, -1.0f, 1.0f);
+
+		DN_CORE_INFO("Changed projection; window => {0}, {1}", width, height);
 	}
 }

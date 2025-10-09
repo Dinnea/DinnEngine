@@ -25,6 +25,7 @@ namespace Dinn
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
+		bool OnWindowResize(WindowResizeEvent& event);
 
 		bool isRunning;
 		unsigned int maxFrameRate;

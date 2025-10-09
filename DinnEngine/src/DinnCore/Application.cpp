@@ -15,11 +15,11 @@ namespace Dinn
 		maxFrameRate = 60;
 		lastFrame = Time::Now();
 
-
 		window = std::unique_ptr<Window>(Window::Create());
-		renderer = std::make_unique<Renderer2D>();
-
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		renderer = std::make_unique<Renderer2D>();
+		renderer->SetProjection(window->GetWidth(), window->GetHeight());
 	}
 
 	Application::~Application()
@@ -72,14 +72,20 @@ namespace Dinn
 	void Application::OnEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 
-		//DN_CORE_TRACE("{0}", event.ToString());
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& event)
 	{
 		isRunning = false;
+		return true;
+	}
+	bool Application::OnWindowResize(WindowResizeEvent& event)
+	{
+		renderer->SetProjection(event.GetWidth(), event.GetHeight());
+
 		return true;
 	}
 }

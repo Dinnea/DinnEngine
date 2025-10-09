@@ -81,9 +81,14 @@ namespace Dinn
 		glfwSetWindowUserPointer(Window, &data);
 		SetVSync(true);
 
+
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		DN_CORE_ASSERT(status, "Failed to initalize glad!")
 
+		glViewport(0, 0, (int)props.Width, (int)props.Height);
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_CULL_FACE);         // just to remove culling as a variable
+		glFrontFace(GL_CCW);
 			//Set GLFW callbacks
 
 			glfwSetWindowSizeCallback(Window, [](GLFWwindow* window, int width, int height)
@@ -95,6 +100,8 @@ namespace Dinn
 
 					WindowResizeEvent event(width, height);
 					data.EventCallback(event);
+					glViewport(0, 0, width, height);
+
 				});
 
 		glfwSetWindowCloseCallback(Window, [](GLFWwindow* window)

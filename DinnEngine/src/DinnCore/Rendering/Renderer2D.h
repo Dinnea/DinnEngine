@@ -1,6 +1,5 @@
 #pragma once
 #include "RendererComponents.h"
-#include "glm.hpp"
 
 namespace Dinn
 {
@@ -13,9 +12,20 @@ namespace Dinn
         void Initialize();
         void Draw();
         void Shutdown();
+
+        /// <summary>
+        /// Renderer handles projection atm => no camera
+        /// </summary>
+        /// <param name="width"> => window width</param>
+        /// <param name="height"> => window height</param>
         void SetProjection(float width, float height);
 
     private:
+
+        glm::mat4 projection;
+        glm::mat4 model;
+
+        //quad
         VAO vao;
         std::unique_ptr<VBO> vbo;
         std::unique_ptr <EBO> ebo;

@@ -1,6 +1,7 @@
 #include "dnpch.h"
 #include "Shader.h"
 #include "glad/glad.h"
+#include "gtc/type_ptr.hpp"
 
 namespace Dinn
 {
@@ -45,6 +46,11 @@ namespace Dinn
 	Shader::~Shader()
 	{
 		Delete();
+	}
+
+	void Shader::SetMatrix4(const char* name, const glm::mat4& matrix)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(this->ID, name), 1, false, glm::value_ptr(matrix));
 	}
 
 	void Shader::Activate()

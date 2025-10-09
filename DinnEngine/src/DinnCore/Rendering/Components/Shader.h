@@ -12,6 +12,9 @@ namespace Dinn
 
 		void Activate();
 		void Delete();
+
+		//Add data to shader methods
+		void SetMatrix4(const char* name, const glm::mat4& matrix);
 	};
 }
 
