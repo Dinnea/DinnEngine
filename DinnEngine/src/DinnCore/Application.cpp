@@ -15,9 +15,9 @@ namespace Dinn
 		maxFrameRate = 60;
 		lastFrame = Time::Now();
 
-		renderer = std::make_unique<Renderer2D>();
 
 		window = std::unique_ptr<Window>(Window::Create());
+		renderer = std::make_unique<Renderer2D>();
 
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 	}

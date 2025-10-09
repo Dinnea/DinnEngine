@@ -6,10 +6,11 @@ namespace Dinn
 {
 	Renderer2D::Renderer2D()
 	{
-		
+		Initialize();
 	}
 	Renderer2D::~Renderer2D()
 	{
+		Shutdown();
 	}
 
 	void Renderer2D::Initialize()
