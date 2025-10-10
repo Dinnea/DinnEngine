@@ -39,6 +39,7 @@ target_include_directories(DinnEngine
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     "${DEPENDENCIES}/glm"
     "${DEPENDENCIES}/spdlog/include"
+	  "${DEPENDENCIES}/stb"
     "${GLFW_ROOT}/include"
     "${GLAD_ROOT}/include"
 )

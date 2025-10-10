@@ -3,6 +3,7 @@
 #include "glfw_glad.h"
 #include "Rendering/SpriteRenderer.h"
 #include <queue>
+#include "Rendering/Texture.h"
 
 namespace Dinn
 {
@@ -16,7 +17,7 @@ namespace Dinn
 		maxFrameRate = 60;
 		lastFrame = Time::Now();
 
-		window = std::unique_ptr<Window>(Window::Create());
+		window = std::unique_ptr<Window>(Window::Create()); //open gl loaded
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		spriteRenderer = std::make_unique<SpriteRenderer>();
@@ -31,18 +32,18 @@ namespace Dinn
 	void Application::Run()
 	{
 		isRunning = true;
-
 		Sprite sprite;
 		sprite.position = glm::vec2(600, 500);
-		sprite.scale = glm::vec2(20, 20);
+		sprite.scale = glm::vec2(500, 500);
+		//sprite.texture = maxwell; //new
 
 		Sprite sprite2;
 		sprite2.position = glm::vec2(150.0f, 150.0f);
 		sprite2.angle = 45;
-		sprite2.scale = glm::vec2(100.0f, 100.0f);
+		sprite2.scale = glm::vec2(150.0f, 150.0f);
+		//sprite2.texture = maxwell; //new
 
 		Sprite* arr[2] = { &sprite, &sprite2 };
-		
 
 		while (isRunning)
 		{

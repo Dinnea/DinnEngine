@@ -20,9 +20,9 @@ namespace Dinn
 		{
 			// pos			// tex
 			-0.5f, -0.5f,   0.0f, 0.0f,  // bottom-left
-			0.5f,  -0.5f,   0.0f, 1.0f,  // bottom-right
+			0.5f,  -0.5f,   1.0f, 0.0f,  // bottom-right
 			0.5f,  0.5f,	1.0f, 1.0f,  // top-right
-			-0.5f, 0.5f,	1.0f, 0.0f   // top-left
+			-0.5f, 0.5f,	0.0f, 1.0f   // top-left
 		};
 
 		GLuint indices[] =
@@ -34,6 +34,8 @@ namespace Dinn
 		vbo = std::make_unique<VBO>(vertices, sizeof(vertices));
 		ebo = std::make_unique<EBO>(indices, sizeof(indices));
 		defaultShader = std::make_shared<Shader>("Shaders/default.vert", "Shaders/default.frag");
+		defaultTexture = std::make_shared<Texture>("Shaders/willow.png",
+			GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE); //new
 
 		vao.Bind();
 		vao.LinkVBO(*vbo, 0);
@@ -47,14 +49,16 @@ namespace Dinn
 		glClearColor(0, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 		defaultShader->Activate();
+		vao.Bind();
+		defaultTexture->Bind();
+		defaultTexture->SetUniform(*defaultShader, "tex", 0);
+
 		defaultShader->SetMatrix4("projection", projection);
 
-		vao.Bind();
 	}
 
 	void SpriteRenderer::Draw(const Sprite& sprite)
 	{
-
 		//reset model
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(sprite.position, 0.0f));

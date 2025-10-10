@@ -34,5 +34,6 @@ namespace Dinn
         std::unique_ptr<VBO> vbo;
         std::unique_ptr <EBO> ebo;
         std::shared_ptr<Shader> defaultShader;
+        std::shared_ptr<Texture> defaultTexture;
 	};
 }
