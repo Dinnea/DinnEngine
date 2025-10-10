@@ -32,9 +32,6 @@ namespace Dinn
 	{
 		glfwPollEvents();
 		glfwSwapBuffers(Window);
-
-		/*if (Input::GetKeyDown(Input::Keyboard::SPACE))
-			DN_CORE_INFO("Space pressed");*/
 	}
 
 	void WinWindow::SetVSync(bool enabled)
@@ -86,9 +83,6 @@ namespace Dinn
 		DN_CORE_ASSERT(status, "Failed to initalize glad!")
 
 		glViewport(0, 0, (int)props.Width, (int)props.Height);
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_CULL_FACE);         // just to remove culling as a variable
-		glFrontFace(GL_CCW);
 			//Set GLFW callbacks
 
 			glfwSetWindowSizeCallback(Window, [](GLFWwindow* window, int width, int height)

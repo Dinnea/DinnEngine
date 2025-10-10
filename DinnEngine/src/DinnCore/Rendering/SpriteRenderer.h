@@ -1,5 +1,6 @@
 #pragma once
 #include "RendererComponents.h"
+#include "Sprite.h"
 
 namespace Dinn
 {
@@ -10,8 +11,11 @@ namespace Dinn
         ~SpriteRenderer();
 
         void Initialize();
-        void Draw();
         void Shutdown();
+
+        void InitFrame();
+        void Draw(const Sprite& sprite);
+        void EndFrame();
 
         /// <summary>
         /// Renderer handles projection atm => no camera
@@ -29,6 +33,6 @@ namespace Dinn
         VAO vao;
         std::unique_ptr<VBO> vbo;
         std::unique_ptr <EBO> ebo;
-        std::shared_ptr<Shader> shader;
+        std::shared_ptr<Shader> defaultShader;
 	};
 }

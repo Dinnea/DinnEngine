@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "glfw_glad.h"
 #include "Rendering/SpriteRenderer.h"
+#include <queue>
 
 namespace Dinn
 {
@@ -31,6 +32,18 @@ namespace Dinn
 	{
 		isRunning = true;
 
+		Sprite sprite;
+		sprite.position = glm::vec2(600, 500);
+		sprite.scale = glm::vec2(20, 20);
+
+		Sprite sprite2;
+		sprite2.position = glm::vec2(150.0f, 150.0f);
+		sprite2.angle = 45;
+		sprite2.scale = glm::vec2(100.0f, 100.0f);
+
+		Sprite* arr[2] = { &sprite, &sprite2 };
+		
+
 		while (isRunning)
 		{
 
@@ -40,7 +53,10 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
-				spriteRenderer->Draw();
+				spriteRenderer->InitFrame();
+				for each(Sprite* var in arr)
+					spriteRenderer->Draw(*var);
+				
 
 				window->Update();
 

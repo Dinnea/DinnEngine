@@ -33,7 +33,7 @@ namespace Dinn
 		vao = VAO();
 		vbo = std::make_unique<VBO>(vertices, sizeof(vertices));
 		ebo = std::make_unique<EBO>(indices, sizeof(indices));
-		shader = std::make_shared<Shader>("Shaders/default.vert", "Shaders/default.frag");
+		defaultShader = std::make_shared<Shader>("Shaders/default.vert", "Shaders/default.frag");
 
 		vao.Bind();
 		vao.LinkVBO(*vbo, 0);
@@ -42,27 +42,35 @@ namespace Dinn
 		vao.Unbind();
 	}
 
-	void SpriteRenderer::Draw()
+	void SpriteRenderer::InitFrame()
 	{
 		glClearColor(0, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
+		defaultShader->Activate();
+		defaultShader->SetMatrix4("projection", projection);
 
-		shader->Activate();
+		vao.Bind();
+	}
+
+	void SpriteRenderer::Draw(const Sprite& sprite)
+	{
 
 		//reset model
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(150.0f, 150.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(sprite.position, 0.0f));
+		model = glm::rotate(model, glm::radians(sprite.angle), glm::vec3(0.0f, 0.0f, 1.0f));
 
 		//transformations
-		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(sprite.scale, 1.0f));
 
-		shader ->SetMatrix4("model", model);
-		shader->SetMatrix4("projection", projection);
+		defaultShader ->SetMatrix4("model", model);
 
-		vao.Bind();
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	}
+
+	void SpriteRenderer::EndFrame()
+	{
 	}
 
 	void SpriteRenderer::Shutdown()
@@ -70,7 +78,7 @@ namespace Dinn
 		vao.Delete();
 		vbo->Delete();
 		ebo->Delete();
-		shader->Delete();
+		defaultShader->Delete();
 	}
 
 	void SpriteRenderer::SetProjection(float width, float height)

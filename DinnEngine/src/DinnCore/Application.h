@@ -3,7 +3,7 @@
 #include "Events/WindowEvent.h"
 #include "Time.h"
 #include "Window.h"
-#include "Rendering/Renderer2D.h"
+#include "Rendering/SpriteRenderer.h"
 #include <chrono>
 #include <thread>
 
@@ -31,7 +31,7 @@ namespace Dinn
 		unsigned int maxFrameRate;
 		double lastFrame;
 
-		std::unique_ptr<Renderer2D> renderer;
+		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 		static Application* instance;
 		std::unique_ptr<Window> window;

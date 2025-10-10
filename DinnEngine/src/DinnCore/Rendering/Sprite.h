@@ -9,9 +9,9 @@ namespace Dinn
 		Sprite();
 		~Sprite();
 
-		glm::vec2 position;
-		glm::vec2 scale;
-		float angle;
+		glm::vec2 position = glm::vec2(0.0, 0.0);
+		glm::vec2 scale = glm::vec2(1.0, 1.0);
+		float angle = 0;
 		std::shared_ptr<Shader> shaderOverride = nullptr;
 
 	private:
