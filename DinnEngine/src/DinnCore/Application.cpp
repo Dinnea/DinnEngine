@@ -63,9 +63,7 @@ namespace Dinn
 
 				//simulate processing
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));
-				// TODO: process input
 				// TODO: update objects
-				// TODO: render
 			}
 			double targetFrameTime = 1.0 / maxFrameRate;
 			double remainingTime = targetFrameTime - deltaTime;
