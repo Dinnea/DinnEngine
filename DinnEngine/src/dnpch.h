@@ -13,6 +13,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "glm.hpp"
+
 #include "DinnCore/Log.h"
 
 #ifdef DN_PLATFORM_WINDOWS

@@ -37,15 +37,35 @@ target_include_directories(glad PUBLIC "${GLAD_ROOT}/include")
 target_include_directories(DinnEngine
   PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${DEPENDENCIES}/glm"
     "${DEPENDENCIES}/spdlog/include"
+	  "${DEPENDENCIES}/stb"
     "${GLFW_ROOT}/include"
     "${GLAD_ROOT}/include"
 )
 
-target_precompile_headers(DinnEngine
-    PRIVATE
-        "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.h>"
-)
+# --- MSVC-only classic PCH setup (no target_precompile_headers) ---
+if (MSVC)
+  set(PCH_HEADER dnpch.h)
+  set(PCH_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.cpp)
+  set(PCH_NAME   ${TARGET_ENGINE}.pch)  # e.g. DinnEngine.pch
+
+  target_sources(${TARGET_ENGINE} PRIVATE ${PCH_SOURCE})
+
+  # Create the PCH from dnpch.cpp (NO quotes anywhere)
+  set_source_files_properties(${PCH_SOURCE} PROPERTIES
+    COMPILE_OPTIONS "/Yc${PCH_HEADER};/Fp$(IntDir)${PCH_NAME}"
+  )
+
+  # All other files: use the PCH (and force-include so you don't add the include manually)
+  target_compile_options(${TARGET_ENGINE} PRIVATE
+    "/Yu${PCH_HEADER}"
+    "/Fp$(IntDir)${PCH_NAME}"
+    "/FI${PCH_HEADER}"
+  )
+endif()
+
+target_compile_options(DinnEngine PRIVATE /FI"dnpch.h")
 
 target_link_libraries(glfw3 INTERFACE
   opengl32 user32 gdi32 shell32 ole32 uuid
@@ -77,8 +97,19 @@ set_target_properties(${TARGET_ENGINE} PROPERTIES
 #---------------------------------
 # Copy the dll to the .exe file's location
 #---------------------------------
-add_custom_command(TARGET DinnEngine POST_BUILD
+add_custom_command(TARGET ${TARGET_ENGINE} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${TARGET_GAME}>"
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-          $<TARGET_FILE:DinnEngine>
-          $<TARGET_FILE_DIR:${TARGET_GAME}>
+          "$<TARGET_FILE:${TARGET_ENGINE}>"
+          "$<TARGET_FILE_DIR:${TARGET_GAME}>"
+  VERBATIM
+)
+
+#---------------------------------
+# Copy the shaders to the .exe file's location
+#---------------------------------
+add_custom_command(TARGET ${TARGET_ENGINE} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/Shaders
+            $<TARGET_FILE_DIR:${TARGET_GAME}>/Shaders
 )

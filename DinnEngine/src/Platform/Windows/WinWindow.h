@@ -1,12 +1,15 @@
 #pragma once
 #include "DinnCore/Window.h"
 #include "DinnCore/Events/Events.h"
-#include "GLFW/glfw3.h"
+
+//Forward declare window to avoid including GLFW
+struct GLFWwindow;
 
 namespace Dinn
 {
 	class WinWindow : public Window
 	{
+
 	public:
 		WinWindow(const WindowProperties& props);
 		virtual ~WinWindow();
@@ -41,6 +44,6 @@ namespace Dinn
 
 		WindowData data;
 
-		static WindowData& GrabWindowData(GLFWwindow* window) { return *static_cast<WindowData*>(glfwGetWindowUserPointer(window)); }
+		static WindowData& GrabWindowData(GLFWwindow* window);
 	};
 }

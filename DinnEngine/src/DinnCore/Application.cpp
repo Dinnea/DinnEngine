@@ -1,5 +1,9 @@
 #include "dnpch.h"
 #include "Application.h"
+#include "glfw_glad.h"
+#include "Rendering/SpriteRenderer.h"
+#include <queue>
+#include "Rendering/Texture.h"
 
 namespace Dinn
 {
@@ -13,9 +17,11 @@ namespace Dinn
 		maxFrameRate = 60;
 		lastFrame = Time::Now();
 
-		window = std::unique_ptr<Window>(Window::Create());
-
+		window = std::unique_ptr<Window>(Window::Create()); //open gl loaded
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		spriteRenderer = std::make_unique<SpriteRenderer>();
+		spriteRenderer->SetProjection(window->GetWidth(), window->GetHeight());
 	}
 
 	Application::~Application()
@@ -26,6 +32,18 @@ namespace Dinn
 	void Application::Run()
 	{
 		isRunning = true;
+		Sprite sprite;
+		sprite.position = glm::vec2(600, 500);
+		sprite.scale = glm::vec2(500, 500);
+		//sprite.texture = maxwell; //new
+
+		Sprite sprite2;
+		sprite2.position = glm::vec2(150.0f, 150.0f);
+		sprite2.angle = 45;
+		sprite2.scale = glm::vec2(150.0f, 150.0f);
+		//sprite2.texture = maxwell; //new
+
+		Sprite* arr[2] = { &sprite, &sprite2 };
 
 		while (isRunning)
 		{
@@ -36,15 +54,17 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
-				glClearColor(0, 1, 1, 1);
-				glClear(GL_COLOR_BUFFER_BIT);
+				spriteRenderer->InitFrame();
+				for each(Sprite* var in arr)
+					spriteRenderer->Draw(*var);
+				
 
 				window->Update();
+
+
 				//simulate processing
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));
-				// TODO: process input
 				// TODO: update objects
-				// TODO: render
 			}
 			double targetFrameTime = 1.0 / maxFrameRate;
 			double remainingTime = targetFrameTime - deltaTime;
@@ -59,6 +79,7 @@ namespace Dinn
 			Time::SetDeltaTime(deltaTime);
 		}
 	}
+
 	void Application::SetTargetFrameRate(unsigned int frameRate)
 	{
 		this->maxFrameRate = frameRate;
@@ -66,14 +87,20 @@ namespace Dinn
 	void Application::OnEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 
-		DN_CORE_TRACE("{0}", event.ToString());
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& event)
 	{
 		isRunning = false;
+		return true;
+	}
+	bool Application::OnWindowResize(WindowResizeEvent& event)
+	{
+		spriteRenderer->SetProjection(event.GetWidth(), event.GetHeight());
+
 		return true;
 	}
 }

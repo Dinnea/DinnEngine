@@ -1,11 +1,11 @@
 #pragma once
 #include "Core.h"
+#include "Events/WindowEvent.h"
 #include "Time.h"
+#include "Window.h"
+#include "Rendering/SpriteRenderer.h"
 #include <chrono>
 #include <thread>
-#include "Window.h"
-#include "GLFW/glfw3.h"
-#include "Events/WindowEvent.h"
 
 namespace Dinn
 {
@@ -25,10 +25,13 @@ namespace Dinn
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
+		bool OnWindowResize(WindowResizeEvent& event);
 
 		bool isRunning;
 		unsigned int maxFrameRate;
 		double lastFrame;
+
+		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 		static Application* instance;
 		std::unique_ptr<Window> window;
