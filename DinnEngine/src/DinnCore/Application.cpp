@@ -27,6 +27,8 @@ namespace Dinn
 	Application::~Application()
 	{
 		instance = nullptr;
+
+		gameObjects.clear();
 	}
 
 	void Application::Run()
@@ -75,8 +77,12 @@ namespace Dinn
 				std::this_thread::sleep_for(sleepDuration);
 				deltaTime = targetFrameTime;
 			}
+
 			//DN_CORE_INFO("Step at {0} delta time", deltaTime);
+
+			// Post frame operations
 			Time::SetDeltaTime(deltaTime);
+			ExeDestroyObjects();
 		}
 	}
 
@@ -90,6 +96,30 @@ namespace Dinn
 
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
+	}
+
+	void Application::Destroy(GameObject& gameObject)
+	{
+		destroyQueue.push_back(gameObject.ID());
+	}
+
+	GameObject& Application::CreateGameObject()
+	{
+		unsigned int id = lastGameObjectId++;
+		auto obj = std::make_unique<GameObject>(id);
+		auto& ref = *obj;
+
+		gameObjects.emplace(id, std::move(obj));
+
+		return ref;
+	}
+
+	void Application::ExeDestroyObjects()
+	{
+		for (auto id : destroyQueue)
+			gameObjects.erase(id);
+		
+		destroyQueue.clear();
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& event)

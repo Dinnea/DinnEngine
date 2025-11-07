@@ -4,17 +4,21 @@
 
 namespace Dinn
 {
+	class Application;
+
 	class GameObject
 	{
 	public:
-		GameObject();
-		GameObject(std::string name);
+		GameObject(unsigned int id);
 		GameObject(const GameObject&) = delete;
 		GameObject& operator=(const GameObject&) = delete;
 		GameObject(GameObject&&) = delete;
 		GameObject& operator=(GameObject&&) = delete;
 
 		Transform& GetTransform() { return transform; }
+		unsigned int ID() const { return id; }
+
+		void Destroy();
 
 		~GameObject();
 
@@ -42,9 +46,10 @@ namespace Dinn
 
 
 	private:
-
+		unsigned int id;
 		Transform transform;
 		std::vector<std::unique_ptr<Component>> components;
+		Application* context;
 	};
 }
 
