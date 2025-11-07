@@ -63,10 +63,12 @@ namespace Dinn
 
 				window->Update();
 
+				for (auto& [id, objPtr] : gameObjects)
+					objPtr->Update();
+
 
 				//simulate processing
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));
-				// TODO: update objects
 			}
 			double targetFrameTime = 1.0 / maxFrameRate;
 			double remainingTime = targetFrameTime - deltaTime;

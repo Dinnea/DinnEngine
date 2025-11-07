@@ -20,6 +20,8 @@ namespace Dinn
 
 		void Destroy();
 
+		virtual void Update();
+
 		~GameObject();
 
 		template<class T, class ... Args>
