@@ -11,6 +11,8 @@ namespace Dinn
 
 	Application::Application()
 	{
+		
+
 		instance = this;
 
 		isRunning = false;
@@ -109,13 +111,18 @@ namespace Dinn
 
 		gameObjects.emplace(id, std::move(obj));
 
+		DN_CORE_INFO("Created GameObject {0}", id);
+
 		return ref;
 	}
 
 	void Application::ExeDestroyObjects()
 	{
 		for (auto id : destroyQueue)
+		{ 
 			gameObjects.erase(id);
+			DN_CORE_INFO("Destroyed GameObject {0}", id);
+		}
 		
 		destroyQueue.clear();
 	}
@@ -133,7 +140,7 @@ namespace Dinn
 	}
 	bool Application::OnKeyEvent(Event& event)
 	{
-		DN_CORE_TRACE(event.ToString());
+		//DN_CORE_TRACE(event.ToString());
 		return true;
 	}
 }

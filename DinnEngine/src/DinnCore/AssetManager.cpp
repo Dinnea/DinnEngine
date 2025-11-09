@@ -15,6 +15,8 @@ namespace Dinn
 
     std::shared_ptr<Texture> AssetManager::LoadTexture(const std::string& path)
     {
+        DN_CORE_INFO("Loading texture: {0}", path);
+
         //check if valid
         const bool isPng = path.ends_with(".png");
         const bool isJpg = path.ends_with(".jpg") || path.ends_with(".jpeg");
@@ -49,6 +51,8 @@ namespace Dinn
 
     std::shared_ptr<Shader> AssetManager::LoadShader(const std::string& vertexPath, const std::string& fragmentPath)
     {
+        DN_CORE_INFO("Loading shader: {0} | {1}", vertexPath, fragmentPath);
+
         const bool isPathValid = (vertexPath.ends_with(".vert") && (fragmentPath.ends_with(fragmentPath)));
 
         if (!isPathValid)
