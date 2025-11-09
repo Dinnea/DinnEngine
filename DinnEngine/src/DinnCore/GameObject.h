@@ -41,7 +41,7 @@ namespace Dinn
 			for (auto& component : components)
 				if (auto ptr = dynamic_cast<T*>(component.get())) return ptr;
 
-			DN_CORE_INFO("No component of type {0} found", typeid(T).name());
+			//DN_CORE_INFO("No component of type {0} found", typeid(T).name());
 			return nullptr;
 		}
 

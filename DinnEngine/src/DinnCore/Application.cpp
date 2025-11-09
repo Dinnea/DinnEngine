@@ -92,6 +92,8 @@ namespace Dinn
 
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
+
+		dispatcher.DispatchByFlag(EventFlagInput, BIND_EVENT_FN(Application::OnKeyEvent));
 	}
 
 	void Application::Destroy(GameObject& gameObject)
@@ -127,6 +129,11 @@ namespace Dinn
 	{
 		spriteRenderer->SetProjection(event.GetWidth(), event.GetHeight());
 
+		return true;
+	}
+	bool Application::OnKeyEvent(Event& event)
+	{
+		DN_CORE_TRACE(event.ToString());
 		return true;
 	}
 }

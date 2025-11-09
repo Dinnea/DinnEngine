@@ -1,10 +1,10 @@
 #include "dnpch.h"
-#include "SpriteRenderer.h"
-#include "gtc/matrix_transform.hpp"
-#include "glad/glad.h"
-#include "Texture.h"
-#include <DinnCore/Sprite.h>
 #include "DinnCore/Application.h"
+#include "glad/glad.h"
+#include "gtc/matrix_transform.hpp"
+#include "SpriteRenderer.h"
+#include "Texture.h"
+#include "DinnCore/Sprite.h"
 
 namespace Dinn
 {
@@ -33,6 +33,7 @@ namespace Dinn
 			0, 1, 2,
 			0, 2, 3,
 		};
+
 		vao = VAO();
 		vbo = std::make_unique<VBO>(vertices, sizeof(vertices));
 		ebo = std::make_unique<EBO>(indices, sizeof(indices));

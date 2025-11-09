@@ -41,6 +41,8 @@ namespace Dinn
 		bool OnWindowClose(WindowCloseEvent& event);
 		bool OnWindowResize(WindowResizeEvent& event);
 
+		bool OnKeyEvent(Event& event);
+
 		void ExeDestroyObjects();
 		bool isRunning;
 		unsigned int maxFrameRate;
