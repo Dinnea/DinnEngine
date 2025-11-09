@@ -7,6 +7,7 @@
 #include <chrono>
 #include <thread>
 #include "GameObject.h"
+#include "AssetManager.h"
 
 namespace Dinn
 {
@@ -26,10 +27,14 @@ namespace Dinn
 		/// </summary>
 		void Destroy(GameObject& gameObject);
 
-		static Application& Get() noexcept { return *instance; }
-		Window& GetWindow() noexcept { return *window; }
+		Window& GetWindow() noexcept  { return *window; }
+
+		AssetManager& GetAssetManager() noexcept { return *assetManager; }
 
 		GameObject& CreateGameObject();
+
+
+		static Application& Instance() noexcept { return *instance; }
 
 
 	private:
@@ -45,12 +50,15 @@ namespace Dinn
 
 		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
-		static Application* instance;
 		std::unique_ptr<Window> window;
+
+		std::unique_ptr<AssetManager> assetManager;
 
 		std::unordered_map<unsigned int, std::unique_ptr<GameObject>> gameObjects;
 
 		std::vector<unsigned int> destroyQueue;
+
+		static Application* instance;
 	};
 
 	// To be defined in client

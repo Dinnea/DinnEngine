@@ -4,7 +4,7 @@
 
 namespace Dinn 
 {
-	GameObject::GameObject(unsigned int id) : transform(*this), id(id), context(&Application::Get())
+	GameObject::GameObject(unsigned int id) : transform(*this), id(id), context(&Application::Instance())
 	{
 	}
 

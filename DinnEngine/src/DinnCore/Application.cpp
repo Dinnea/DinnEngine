@@ -20,15 +20,17 @@ namespace Dinn
 		window = std::unique_ptr<Window>(Window::Create()); //open gl loaded
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
+		assetManager = std::make_unique<AssetManager>();
+
 		spriteRenderer = std::make_unique<SpriteRenderer>();
 		spriteRenderer->SetProjection(window->GetWidth(), window->GetHeight());
 	}
 
 	Application::~Application()
 	{
-		instance = nullptr;
-
 		gameObjects.clear();
+
+		instance = nullptr;
 	}
 
 	void Application::Run()

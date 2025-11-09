@@ -5,7 +5,7 @@ namespace Dinn
 {
     AssetManager::AssetManager()
     {
-        defaultTexture = LoadTexture("willow.png");
+        defaultTexture = LoadTexture("default.jpg");
         defaultShader = LoadShader("default.vert", "default.frag");
     }
 
@@ -19,9 +19,9 @@ namespace Dinn
         const bool isPng = path.ends_with(".png");
         const bool isJpg = path.ends_with(".jpg") || path.ends_with(".jpeg");
 
-        if (!(isPng && isJpg))
+        if (!(isPng || isJpg))
         {
-            DN_CORE_ERROR("Bad format. Only .png and .jpg are supported. Returning nullptr.");
+            DN_CORE_ERROR("Bad path for texture import. Only .png and .jpg are supported. Returning nullptr.");
             return nullptr;
         }
 
@@ -53,7 +53,7 @@ namespace Dinn
 
         if (!isPathValid)
         {
-            DN_CORE_ERROR("Bad format. vertexPath needs to end in .vert, fragmentPath in .frag, returning nullptr");
+            DN_CORE_ERROR("Bad path for shader import. vertexPath needs to end in .vert, fragmentPath in .frag, returning nullptr");
             return nullptr;
         }
 
