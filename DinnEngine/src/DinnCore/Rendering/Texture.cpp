@@ -4,7 +4,7 @@
 
 namespace Dinn
 {
-	Texture::Texture(const char* image, uint32_t type, uint32_t slot, uint32_t format, uint32_t pixelType)
+	Texture::Texture(const char* path, uint32_t type, uint32_t slot, uint32_t format, uint32_t pixelType)
 	{
 		this->type = type;
 
@@ -12,14 +12,12 @@ namespace Dinn
 
 		stbi_set_flip_vertically_on_load(true);
 
-		unsigned char* bytes = stbi_load(image, &width, &height, &colorChannels, STBI_rgb_alpha);
+		unsigned char* bytes = stbi_load(path, &width, &height, &colorChannels, STBI_rgb_alpha);
 		if (!bytes)
 		{
-			DN_CORE_ERROR("stbi_load failed for '{}': {}", image, stbi_failure_reason());
+			DN_CORE_ERROR("stbi_load failed for '{}': {}", path, stbi_failure_reason());
 			throw std::runtime_error("Texture load failed");
 		}
-		else
-			DN_CORE_ERROR("not the issue");
 
 		glGenTextures(1, &ID);
 

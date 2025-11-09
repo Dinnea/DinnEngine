@@ -44,7 +44,6 @@ target_include_directories(DinnEngine
     "${GLAD_ROOT}/include"
 )
 
-# --- MSVC-only classic PCH setup (no target_precompile_headers) ---
 if (MSVC)
   set(PCH_HEADER dnpch.h)
   set(PCH_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.cpp)
@@ -106,10 +105,10 @@ add_custom_command(TARGET ${TARGET_ENGINE} POST_BUILD
 )
 
 #---------------------------------
-# Copy the shaders to the .exe file's location
+# Copy the textures and shaders to the .exe file's location
 #---------------------------------
 add_custom_command(TARGET ${TARGET_ENGINE} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/Shaders
-            $<TARGET_FILE_DIR:${TARGET_GAME}>/Shaders
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/Resources
+            $<TARGET_FILE_DIR:${TARGET_GAME}>/Resources
 )
