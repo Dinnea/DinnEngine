@@ -58,9 +58,17 @@ namespace Dinn
 			return true;
 		}
 
+		bool DispatchByFlag(EventFlag flag, std::function<bool(Event&)> func)
+		{
+			if (!event.HasFlag(flag))
+				return false;
+
+			event.handled |= func(event);
+			return true;
+		}
+
 	private:
 		Event& event;
-
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
