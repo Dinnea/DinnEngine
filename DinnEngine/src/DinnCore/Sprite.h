@@ -5,7 +5,7 @@
 
 namespace Dinn
 {
-	struct Sprite : Component
+	struct DINN_API Sprite : Component
 	{
 		friend class GameObject;
 
@@ -22,7 +22,6 @@ namespace Dinn
 		bool HasTextureOverride() { return !texture.expired(); }
 		bool HasShaderOverrride() {	return !shader.expired(); }
 
-	protected:
 		explicit Sprite(GameObject& owner) 
 			: Component(owner) {}
 		explicit Sprite(GameObject& owner, std::shared_ptr<Texture> texture) 
@@ -32,6 +31,7 @@ namespace Dinn
 		explicit Sprite(GameObject& owner, std::shared_ptr<Texture> texture, std::shared_ptr<Shader> shader)
 			: Component(owner), texture(texture), shader(shader) {}
 
+	protected:
 		std::weak_ptr<Shader> shader;
 		std::weak_ptr<Texture> texture;
 	};

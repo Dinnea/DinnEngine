@@ -3,7 +3,7 @@
 #include "Components/Shader.h"
 namespace Dinn
 {
-	class Texture
+	class DINN_API Texture
 	{
 	public:
 		Texture(const char* image, uint32_t type, uint32_t slot, uint32_t format, uint32_t pixelType);

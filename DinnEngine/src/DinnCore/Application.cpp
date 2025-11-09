@@ -36,18 +36,6 @@ namespace Dinn
 	void Application::Run()
 	{
 		isRunning = true;
-		//SpriteOld sprite;
-		//sprite.position = glm::vec2(600, 500);
-		//sprite.scale = glm::vec2(500, 500);
-		////sprite.texture = maxwell; //new
-
-		//SpriteOld sprite2;
-		//sprite2.position = glm::vec2(150.0f, 150.0f);
-		//sprite2.angle = 45;
-		//sprite2.scale = glm::vec2(150.0f, 150.0f);
-		////sprite2.texture = maxwell; //new
-
-		//SpriteOld* arr[2] = { &sprite, &sprite2 };
 
 		while (isRunning)
 		{
@@ -58,16 +46,20 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
-				//spriteRenderer->InitFrame();
-				/*for each(SpriteOld* var in arr)
-					spriteRenderer->Draw(*var);*/
-				
-
-				window->Update();
+				spriteRenderer->InitFrame();
 
 				for (auto& [id, objPtr] : gameObjects)
+				{
 					objPtr->Update();
 
+					auto* sprite = objPtr->GetComponent<Sprite>();
+					Transform* transform = objPtr->GetTransform();
+
+					if (sprite)
+						spriteRenderer->Draw(*sprite, *transform);
+				}
+
+				window->Update();
 
 				//simulate processing
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));

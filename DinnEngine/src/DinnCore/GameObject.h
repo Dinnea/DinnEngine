@@ -6,7 +6,7 @@ namespace Dinn
 {
 	class Application;
 
-	class GameObject
+	class DINN_API GameObject
 	{
 	public:
 		GameObject(unsigned int id);
@@ -15,7 +15,7 @@ namespace Dinn
 		GameObject(GameObject&&) = delete;
 		GameObject& operator=(GameObject&&) = delete;
 
-		Transform& GetTransform() { return transform; }
+		Transform* GetTransform() { return  dynamic_cast<Transform*>(transform.get()); }
 		unsigned int ID() const { return id; }
 
 		void Destroy();
@@ -32,6 +32,7 @@ namespace Dinn
 			auto componentPtr = std::make_unique<T>(*this, std::forward<Args>(args)...);
 			T& ref = *componentPtr;
 			components.push_back(std::move(componentPtr));
+			return ref;
 		}
 
 		template<class T>
@@ -49,7 +50,7 @@ namespace Dinn
 
 	private:
 		unsigned int id;
-		Transform transform;
+		std::unique_ptr<Transform> transform;
 		std::vector<std::unique_ptr<Component>> components;
 		Application* context;
 	};

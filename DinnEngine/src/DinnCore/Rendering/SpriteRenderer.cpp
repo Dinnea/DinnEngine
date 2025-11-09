@@ -4,6 +4,7 @@
 #include "glad/glad.h"
 #include "Texture.h"
 #include <DinnCore/Sprite.h>
+#include "DinnCore/Application.h"
 
 namespace Dinn
 {
@@ -35,9 +36,11 @@ namespace Dinn
 		vao = VAO();
 		vbo = std::make_unique<VBO>(vertices, sizeof(vertices));
 		ebo = std::make_unique<EBO>(indices, sizeof(indices));
-		//defaultShader = std::make_shared<Shader>("Shaders/default.vert", "Shaders/default.frag");
-		//defaultTexture = std::make_shared<Texture>("Shaders/willow.png",
-			//GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+		
+		AssetManager& assetManager = Application::Instance().GetAssetManager();
+
+		defaultShader = assetManager.GetDefaultShader();
+		defaultTexture = assetManager.GetDefaultTexture();
 
 		vao.Bind();
 		vao.LinkVBO(*vbo, 0);
@@ -50,17 +53,23 @@ namespace Dinn
 	{
 		glClearColor(0, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
-		defaultShader->Activate();
+
 		vao.Bind();
-		defaultTexture->Bind();
-		defaultTexture->SetUniform(*defaultShader, "tex", 0);
-
-		defaultShader->SetMatrix4("projection", projection);
-
 	}
 
 	void SpriteRenderer::Draw(const Sprite& sprite, const Transform& transform)
 	{
+		auto shader = sprite.GetShader();
+		if (!shader) shader = defaultShader;
+
+		auto texture = sprite.GetTexture();
+		if (!texture) texture = defaultTexture;
+
+		shader->Activate();
+		texture->Bind();
+		texture->SetUniform(*shader, "tex", 0);
+
+		shader ->SetMatrix4("projection", projection);
 
 		//reset model
 		model = glm::mat4(1.0f);
@@ -70,8 +79,7 @@ namespace Dinn
 		//transformations
 		model = glm::scale(model, glm::vec3(transform.scale, 1.0f));
 
-		defaultShader ->SetMatrix4("model", model);
-
+		shader ->SetMatrix4("model", model);
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}

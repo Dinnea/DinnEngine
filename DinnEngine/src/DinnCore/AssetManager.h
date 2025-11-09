@@ -3,11 +3,14 @@
 
 namespace Dinn
 {
-	class AssetManager
+	class DINN_API AssetManager
 	{
 	public:
 		AssetManager();
 		~AssetManager();
+
+		std::shared_ptr<Texture> GetDefaultTexture() { return defaultTexture; }
+		std::shared_ptr<Shader> GetDefaultShader() { return defaultShader; }
 
 		/// <summary>
 		/// Loads a texture from the games's asset directory.

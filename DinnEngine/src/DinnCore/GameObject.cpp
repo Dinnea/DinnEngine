@@ -4,7 +4,8 @@
 
 namespace Dinn 
 {
-	GameObject::GameObject(unsigned int id) : transform(*this), id(id), context(&Application::Instance())
+	GameObject::GameObject(unsigned int id) 
+		: transform(std::make_unique<Transform>(*this)), id(id), context(&Application::Instance())
 	{
 	}
 
