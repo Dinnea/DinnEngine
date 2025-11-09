@@ -20,7 +20,7 @@ namespace Dinn
 
 		void Destroy();
 
-		virtual void Update();
+		virtual void Update() {}
 
 		~GameObject();
 
@@ -30,8 +30,8 @@ namespace Dinn
 			static_assert(std::is_base_of_v<Component, T>, "T must derive from Component");
 
 			auto componentPtr = std::make_unique<T>(*this, std::forward<Args>(args)...);
-			T& ref = *p;
-			components.push_back(std::move(componentPtr)
+			T& ref = *componentPtr;
+			components.push_back(std::move(componentPtr));
 		}
 
 		template<class T>
@@ -40,7 +40,7 @@ namespace Dinn
 			for (auto& component : components)
 				if (auto ptr = dynamic_cast<T*>(component.get())) return ptr;
 
-			DN_CORE_INFO("No component of type {0} found", typeid(T).name())
+			DN_CORE_INFO("No component of type {0} found", typeid(T).name());
 			return nullptr;
 		}
 

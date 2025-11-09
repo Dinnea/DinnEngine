@@ -2,6 +2,8 @@
 #include "SpriteRenderer.h"
 #include "gtc/matrix_transform.hpp"
 #include "glad/glad.h"
+#include "Texture.h"
+#include <DinnCore/Sprite.h>
 
 namespace Dinn
 {
@@ -33,9 +35,9 @@ namespace Dinn
 		vao = VAO();
 		vbo = std::make_unique<VBO>(vertices, sizeof(vertices));
 		ebo = std::make_unique<EBO>(indices, sizeof(indices));
-		defaultShader = std::make_shared<Shader>("Shaders/default.vert", "Shaders/default.frag");
-		defaultTexture = std::make_shared<Texture>("Shaders/willow.png",
-			GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE); //new
+		//defaultShader = std::make_shared<Shader>("Shaders/default.vert", "Shaders/default.frag");
+		//defaultTexture = std::make_shared<Texture>("Shaders/willow.png",
+			//GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 
 		vao.Bind();
 		vao.LinkVBO(*vbo, 0);
@@ -57,15 +59,16 @@ namespace Dinn
 
 	}
 
-	void SpriteRenderer::Draw(const Sprite& sprite)
+	void SpriteRenderer::Draw(const Sprite& sprite, const Transform& transform)
 	{
+
 		//reset model
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(sprite.position, 0.0f));
-		model = glm::rotate(model, glm::radians(sprite.angle), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(transform.position, 0.0f));
+		model = glm::rotate(model, glm::radians(transform.angle), glm::vec3(0.0f, 0.0f, 1.0f));
 
 		//transformations
-		model = glm::scale(model, glm::vec3(sprite.scale, 1.0f));
+		model = glm::scale(model, glm::vec3(transform.scale, 1.0f));
 
 		defaultShader ->SetMatrix4("model", model);
 
