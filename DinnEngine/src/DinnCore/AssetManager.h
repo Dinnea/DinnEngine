@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <DinnCore/Rendering/Texture.h>
+#include "DinnCore/Rendering/Texture.h"
 
 namespace Dinn
 {
@@ -57,4 +57,3 @@ namespace Dinn
 		std::shared_ptr<Shader> defaultShader;
 	};
 }
-

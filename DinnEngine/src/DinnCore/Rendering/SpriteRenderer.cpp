@@ -1,10 +1,10 @@
 #include "dnpch.h"
 #include "DinnCore/Application.h"
+#include "DinnCore/Sprite.h"
 #include "glad/glad.h"
 #include "gtc/matrix_transform.hpp"
 #include "SpriteRenderer.h"
 #include "Texture.h"
-#include "DinnCore/Sprite.h"
 
 namespace Dinn
 {

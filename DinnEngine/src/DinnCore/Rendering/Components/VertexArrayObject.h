@@ -18,4 +18,3 @@ namespace Dinn
 	};
 	using VAO = VertexArrayObject;
 }
-

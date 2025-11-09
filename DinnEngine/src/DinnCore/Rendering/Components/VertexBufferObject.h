@@ -17,4 +17,3 @@ namespace Dinn
 	};
 	using VBO = VertexBufferObject;
 }
-

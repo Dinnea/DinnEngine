@@ -1,7 +1,6 @@
 #include "dnpch.h"
-#include "WinWindow.h"
-
 #include "DinnCore/glfw_glad.h"
+#include "WinWindow.h"
 
 
 namespace Dinn 
@@ -189,4 +188,3 @@ namespace Dinn
 		return *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 	}
 }
-

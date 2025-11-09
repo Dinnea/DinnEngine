@@ -1,7 +1,7 @@
 #include "dnpch.h"
-#include "Shader.h"
 #include "glad/glad.h"
 #include "gtc/type_ptr.hpp"
+#include "Shader.h"
 
 namespace Dinn
 {

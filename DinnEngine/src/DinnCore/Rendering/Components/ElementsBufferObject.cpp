@@ -1,6 +1,7 @@
 #include "dnpch.h"
 #include "ElementsBufferObject.h"
-#include <glad/glad.h>
+#include "glad/glad.h"
+
  namespace Dinn
  {
 	 EBO::ElementsBufferObject(uint32_t* indices, std::size_t size)

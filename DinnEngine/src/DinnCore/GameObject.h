@@ -57,5 +57,3 @@ namespace Dinn
 		Application* context;
 	};
 }
-
-

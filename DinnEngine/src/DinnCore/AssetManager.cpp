@@ -1,5 +1,6 @@
 #include "dnpch.h"
 #include "AssetManager.h"
+#include "glad/glad.h"
 
 namespace Dinn
 {

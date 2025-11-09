@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "glfw_glad.h"
 #include "Rendering/SpriteRenderer.h"
-#include <queue>
 #include "Rendering/Texture.h"
+#include <queue>
 
 namespace Dinn
 {
@@ -132,12 +132,14 @@ namespace Dinn
 		isRunning = false;
 		return true;
 	}
+
 	bool Application::OnWindowResize(WindowResizeEvent& event)
 	{
 		spriteRenderer->SetProjection(event.GetWidth(), event.GetHeight());
 
 		return true;
 	}
+
 	bool Application::OnKeyEvent(Event& event)
 	{
 		//DN_CORE_TRACE(event.ToString());

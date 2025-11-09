@@ -1,6 +1,6 @@
 #pragma once
-#include "DinnCore/Window.h"
 #include "DinnCore/Events/Events.h"
+#include "DinnCore/Window.h"
 
 //Forward declare window to avoid including GLFW
 struct GLFWwindow;

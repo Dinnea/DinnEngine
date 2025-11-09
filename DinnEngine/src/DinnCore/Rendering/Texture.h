@@ -1,6 +1,6 @@
 #pragma once
-#include<glad/glad.h>
 #include "Components/Shader.h"
+
 namespace Dinn
 {
 	class DINN_API Texture
@@ -18,4 +18,3 @@ namespace Dinn
 		void Delete();
 	};
 }
-

@@ -1,13 +1,14 @@
 #pragma once
+#include "dnpch.h"
+#include "AssetManager.h"
 #include "Core.h"
 #include "Events/WindowEvent.h"
+#include "GameObject.h"
+#include "Rendering/SpriteRenderer.h"
 #include "Time.h"
 #include "Window.h"
-#include "Rendering/SpriteRenderer.h"
 #include <chrono>
 #include <thread>
-#include "GameObject.h"
-#include "AssetManager.h"
 
 namespace Dinn
 {

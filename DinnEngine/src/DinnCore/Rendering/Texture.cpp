@@ -1,6 +1,7 @@
 #include "dnpch.h"
-#include "Texture.h"
+#include "glad/glad.h"
 #include "../../../dependencies/stb/stb_image.h" //woah this is gross, need to fix this
+#include "Texture.h"
 
 namespace Dinn
 {

@@ -17,4 +17,3 @@ namespace Dinn
 		void SetMatrix4(const char* name, const glm::mat4& matrix);
 	};
 }
-
