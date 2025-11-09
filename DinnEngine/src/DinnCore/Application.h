@@ -6,6 +6,8 @@
 #include "Rendering/SpriteRenderer.h"
 #include <chrono>
 #include <thread>
+#include "GameObject.h"
+#include "AssetManager.h"
 
 namespace Dinn
 {
@@ -20,21 +22,43 @@ namespace Dinn
 
 		void OnEvent(Event& event);
 
-		static Application& Get() noexcept { return *instance; }
-		Window& GetWindow() noexcept { return *window; }
+		/// <summary>
+		/// Marks a game object for destroying at the end of the frame.
+		/// </summary>
+		void Destroy(GameObject& gameObject);
+
+		Window& GetWindow() noexcept  { return *window; }
+
+		AssetManager& GetAssetManager() noexcept { return *assetManager; }
+
+		GameObject& CreateGameObject();
+
+
+		static Application& Instance() noexcept { return *instance; }
+
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
 		bool OnWindowResize(WindowResizeEvent& event);
 
+		void ExeDestroyObjects();
 		bool isRunning;
 		unsigned int maxFrameRate;
 		double lastFrame;
 
+		unsigned int lastGameObjectId = 0;
+
 		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
-		static Application* instance;
 		std::unique_ptr<Window> window;
+
+		std::unique_ptr<AssetManager> assetManager;
+
+		std::unordered_map<unsigned int, std::unique_ptr<GameObject>> gameObjects;
+
+		std::vector<unsigned int> destroyQueue;
+
+		static Application* instance;
 	};
 
 	// To be defined in client

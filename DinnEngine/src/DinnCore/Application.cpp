@@ -20,30 +20,22 @@ namespace Dinn
 		window = std::unique_ptr<Window>(Window::Create()); //open gl loaded
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
+		assetManager = std::make_unique<AssetManager>();
+
 		spriteRenderer = std::make_unique<SpriteRenderer>();
 		spriteRenderer->SetProjection(window->GetWidth(), window->GetHeight());
 	}
 
 	Application::~Application()
 	{
+		gameObjects.clear();
+
 		instance = nullptr;
 	}
 
 	void Application::Run()
 	{
 		isRunning = true;
-		Sprite sprite;
-		sprite.position = glm::vec2(600, 500);
-		sprite.scale = glm::vec2(500, 500);
-		//sprite.texture = maxwell; //new
-
-		Sprite sprite2;
-		sprite2.position = glm::vec2(150.0f, 150.0f);
-		sprite2.angle = 45;
-		sprite2.scale = glm::vec2(150.0f, 150.0f);
-		//sprite2.texture = maxwell; //new
-
-		Sprite* arr[2] = { &sprite, &sprite2 };
 
 		while (isRunning)
 		{
@@ -55,16 +47,22 @@ namespace Dinn
 			if (deltaTime > 0.0)
 			{
 				spriteRenderer->InitFrame();
-				for each(Sprite* var in arr)
-					spriteRenderer->Draw(*var);
-				
+
+				for (auto& [id, objPtr] : gameObjects)
+				{
+					objPtr->Update();
+
+					auto* sprite = objPtr->GetComponent<Sprite>();
+					Transform* transform = objPtr->GetTransform();
+
+					if (sprite)
+						spriteRenderer->Draw(*sprite, *transform);
+				}
 
 				window->Update();
 
-
 				//simulate processing
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));
-				// TODO: update objects
 			}
 			double targetFrameTime = 1.0 / maxFrameRate;
 			double remainingTime = targetFrameTime - deltaTime;
@@ -75,8 +73,12 @@ namespace Dinn
 				std::this_thread::sleep_for(sleepDuration);
 				deltaTime = targetFrameTime;
 			}
+
 			//DN_CORE_INFO("Step at {0} delta time", deltaTime);
+
+			// Post frame operations
 			Time::SetDeltaTime(deltaTime);
+			ExeDestroyObjects();
 		}
 	}
 
@@ -90,6 +92,30 @@ namespace Dinn
 
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
+	}
+
+	void Application::Destroy(GameObject& gameObject)
+	{
+		destroyQueue.push_back(gameObject.ID());
+	}
+
+	GameObject& Application::CreateGameObject()
+	{
+		unsigned int id = lastGameObjectId++;
+		auto obj = std::make_unique<GameObject>(id);
+		auto& ref = *obj;
+
+		gameObjects.emplace(id, std::move(obj));
+
+		return ref;
+	}
+
+	void Application::ExeDestroyObjects()
+	{
+		for (auto id : destroyQueue)
+			gameObjects.erase(id);
+		
+		destroyQueue.clear();
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& event)

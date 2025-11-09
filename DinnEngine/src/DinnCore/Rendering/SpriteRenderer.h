@@ -1,6 +1,7 @@
 #pragma once
 #include "RendererComponents.h"
-#include "Sprite.h"
+#include "DinnCore/Sprite.h"
+#include "DinnCore/Transform.h"
 
 namespace Dinn
 {
@@ -14,7 +15,7 @@ namespace Dinn
         void Shutdown();
 
         void InitFrame();
-        void Draw(const Sprite& sprite);
+        void Draw(const Sprite& sprite, const Transform& transform);
         void EndFrame();
 
         /// <summary>
