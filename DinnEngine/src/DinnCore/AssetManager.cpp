@@ -12,6 +12,8 @@ namespace Dinn
 
     AssetManager::~AssetManager()
     {
+        textureCache.clear();
+        shaderCache.clear();
     }
 
     std::shared_ptr<Texture> AssetManager::LoadTexture(const std::string& path)
@@ -33,17 +35,11 @@ namespace Dinn
             return iterator->second;
 
         //else load new texture
-        std::shared_ptr<Texture> tex;
 
         std::string fullPath = "Resources/Textures/" + path;
 
-        // PNG needs GL_RGBA
-        if (isPng)
-           tex = std::make_shared<Texture>(fullPath.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+        std::shared_ptr<Texture> tex = std::make_shared<Texture>(fullPath.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_UNSIGNED_BYTE);
 
-        // JPG needs GL_RGB
-        if(isJpg)
-           tex = std::make_shared<Texture>(fullPath.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
 
         textureCache[path] = tex;
 
