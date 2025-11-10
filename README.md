@@ -2,7 +2,7 @@
 
 ## Overview  
 DinnEngine is a personal project to build a simple but structured 2D game engine in C++ from scratch.
-The goal is to learn both game engine architecture and modern C++ practices by implementing the core systems manually — rather than relying on high-level frameworks.
+The goal is to learn both game engine architecture and modern C++ practices by implementing the core systems manually - rather than relying on high-level frameworks.
 Currently only supports Windows and Visual Studio. Uses C++ 20
 
 ## Current Features 
