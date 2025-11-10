@@ -11,8 +11,6 @@ namespace Dinn
 
 	Application::Application()
 	{
-		
-
 		instance = this;
 
 		isRunning = false;
@@ -32,6 +30,11 @@ namespace Dinn
 	{
 		gameObjects.clear();
 
+		spriteRenderer.reset();
+		assetManager.reset();
+		window.reset();
+
+		glfwTerminate();
 		instance = nullptr;
 	}
 
@@ -129,6 +132,7 @@ namespace Dinn
 
 	bool Application::OnWindowClose(WindowCloseEvent& event)
 	{
+		DN_CORE_TRACE(event.ToString());
 		isRunning = false;
 		return true;
 	}

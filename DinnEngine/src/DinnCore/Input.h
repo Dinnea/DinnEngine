@@ -10,7 +10,7 @@ namespace Dinn::Input
     /// <summary>
     /// D0 ... D9 for digit keys
     /// </summary>
-    enum class Keyboard : Key
+    enum class DINN_API Keyboard : Key
     {
         UNKNOWN = GLFW_KEY_UNKNOWN,
         SPACE = GLFW_KEY_SPACE,
@@ -138,7 +138,7 @@ namespace Dinn::Input
     /// <summary>
     /// LMB, RMB, MMB for left, right and middle mouse buttons
     /// </summary>
-    enum class Mouse : Key
+    enum class DINN_API Mouse : Key
     {
         /// <summary>
         /// Left mouse button

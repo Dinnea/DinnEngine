@@ -33,7 +33,7 @@ namespace Dinn
 			T& ref = *componentPtr;
 			components.push_back(std::move(componentPtr));
 
-			DN_CORE_INFO("Added Component: Sprite to GameObject {0}", id);
+			DN_CORE_INFO("Added Component: {0} to GameObject {1}", typeid(T).name(), id);
 			return ref;
 		}
 

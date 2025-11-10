@@ -3,7 +3,7 @@
 namespace Dinn 
 {
 	std::string getFileContents(const char* filename);
-	class Shader
+	class DINN_API Shader
 	{
 	public:
 		uint32_t ID;

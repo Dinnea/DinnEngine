@@ -51,11 +51,11 @@ namespace Dinn
 
 		unsigned int lastGameObjectId = 0;
 
-		std::unique_ptr<SpriteRenderer> spriteRenderer;
-
 		std::unique_ptr<Window> window;
 
 		std::unique_ptr<AssetManager> assetManager;
+
+		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 		std::unordered_map<unsigned int, std::unique_ptr<GameObject>> gameObjects;
 

@@ -5,7 +5,7 @@
 
 namespace Dinn
 {
-	class SpriteRenderer
+	class DINN_API SpriteRenderer
 	{
     public:
         SpriteRenderer();
