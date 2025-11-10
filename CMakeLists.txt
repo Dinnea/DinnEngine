@@ -18,7 +18,7 @@ set(TARGET_ENGINE "DinnEngine")
 set(TARGET_GAME "ExampleGame")
 
 if (MSVC)
-    set (CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    set (CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
     add_compile_options("/utf-8")
 endif()
 
