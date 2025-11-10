@@ -1,6 +1,6 @@
 #pragma once
-#include "DinnCore/Rendering/Components/Shader.h"
 #include "Component.h"
+#include "DinnCore/Rendering/Components/Shader.h"
 #include "Rendering/Texture.h"
 
 namespace Dinn
@@ -36,4 +36,3 @@ namespace Dinn
 		std::weak_ptr<Texture> texture;
 	};
 }
-

@@ -1,13 +1,14 @@
 #pragma once
+#include "dnpch.h"
+#include "AssetManager.h"
 #include "Core.h"
 #include "Events/WindowEvent.h"
+#include "GameObject.h"
+#include "Rendering/SpriteRenderer.h"
 #include "Time.h"
 #include "Window.h"
-#include "Rendering/SpriteRenderer.h"
 #include <chrono>
 #include <thread>
-#include "GameObject.h"
-#include "AssetManager.h"
 
 namespace Dinn
 {
@@ -50,11 +51,11 @@ namespace Dinn
 
 		unsigned int lastGameObjectId = 0;
 
-		std::unique_ptr<SpriteRenderer> spriteRenderer;
-
 		std::unique_ptr<Window> window;
 
 		std::unique_ptr<AssetManager> assetManager;
+
+		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 		std::unordered_map<unsigned int, std::unique_ptr<GameObject>> gameObjects;
 

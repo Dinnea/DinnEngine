@@ -1,10 +1,10 @@
 #include "dnpch.h"
 #include "DinnCore/Application.h"
+#include "DinnCore/Sprite.h"
 #include "glad/glad.h"
 #include "gtc/matrix_transform.hpp"
 #include "SpriteRenderer.h"
 #include "Texture.h"
-#include "DinnCore/Sprite.h"
 
 namespace Dinn
 {
@@ -101,6 +101,6 @@ namespace Dinn
 	{
 		projection = glm::ortho(0.0f, width, 0.0f, height, -1.0f, 1.0f);
 
-		DN_CORE_INFO("Changed projection; window => {0}, {1}", width, height);
+		DN_CORE_TRACE("Changed projection; window => {0}, {1}", width, height);
 	}
 }

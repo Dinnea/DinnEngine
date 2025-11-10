@@ -1,11 +1,11 @@
 #pragma once
-#include "RendererComponents.h"
 #include "DinnCore/Sprite.h"
 #include "DinnCore/Transform.h"
+#include "RendererComponents.h"
 
 namespace Dinn
 {
-	class SpriteRenderer
+	class DINN_API SpriteRenderer
 	{
     public:
         SpriteRenderer();

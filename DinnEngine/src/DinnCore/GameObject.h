@@ -32,6 +32,8 @@ namespace Dinn
 			auto componentPtr = std::make_unique<T>(*this, std::forward<Args>(args)...);
 			T& ref = *componentPtr;
 			components.push_back(std::move(componentPtr));
+
+			DN_CORE_INFO("Added Component: {0} to GameObject {1}", typeid(T).name(), id);
 			return ref;
 		}
 
@@ -41,7 +43,7 @@ namespace Dinn
 			for (auto& component : components)
 				if (auto ptr = dynamic_cast<T*>(component.get())) return ptr;
 
-			//DN_CORE_INFO("No component of type {0} found", typeid(T).name());
+			//DN_CORE_WARN("No component of type {0} found", typeid(T).name());
 			return nullptr;
 		}
 
@@ -55,5 +57,3 @@ namespace Dinn
 		Application* context;
 	};
 }
-
-

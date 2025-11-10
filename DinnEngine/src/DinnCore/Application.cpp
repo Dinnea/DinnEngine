@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "glfw_glad.h"
 #include "Rendering/SpriteRenderer.h"
-#include <queue>
 #include "Rendering/Texture.h"
+#include <queue>
 
 namespace Dinn
 {
@@ -30,6 +30,11 @@ namespace Dinn
 	{
 		gameObjects.clear();
 
+		spriteRenderer.reset();
+		assetManager.reset();
+		window.reset();
+
+		glfwTerminate();
 		instance = nullptr;
 	}
 
@@ -109,31 +114,39 @@ namespace Dinn
 
 		gameObjects.emplace(id, std::move(obj));
 
+		DN_CORE_INFO("Created GameObject {0}", id);
+
 		return ref;
 	}
 
 	void Application::ExeDestroyObjects()
 	{
 		for (auto id : destroyQueue)
+		{ 
 			gameObjects.erase(id);
+			DN_CORE_INFO("Destroyed GameObject {0}", id);
+		}
 		
 		destroyQueue.clear();
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& event)
 	{
+		DN_CORE_TRACE(event.ToString());
 		isRunning = false;
 		return true;
 	}
+
 	bool Application::OnWindowResize(WindowResizeEvent& event)
 	{
 		spriteRenderer->SetProjection(event.GetWidth(), event.GetHeight());
 
 		return true;
 	}
+
 	bool Application::OnKeyEvent(Event& event)
 	{
-		DN_CORE_TRACE(event.ToString());
+		//DN_CORE_TRACE(event.ToString());
 		return true;
 	}
 }

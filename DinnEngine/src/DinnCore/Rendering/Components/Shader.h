@@ -3,7 +3,7 @@
 namespace Dinn 
 {
 	std::string getFileContents(const char* filename);
-	class Shader
+	class DINN_API Shader
 	{
 	public:
 		uint32_t ID;
@@ -17,4 +17,3 @@ namespace Dinn
 		void SetMatrix4(const char* name, const glm::mat4& matrix);
 	};
 }
-

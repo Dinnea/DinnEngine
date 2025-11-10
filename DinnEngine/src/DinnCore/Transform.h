@@ -15,4 +15,3 @@ namespace Dinn
 		float angle = 0.f;
 	};
 }
-

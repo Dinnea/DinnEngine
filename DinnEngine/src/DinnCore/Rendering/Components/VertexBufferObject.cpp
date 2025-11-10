@@ -1,6 +1,6 @@
 #include "dnpch.h"
+#include "glad/glad.h"
 #include "VertexBufferObject.h"
-#include <glad/glad.h>
 
 namespace Dinn 
 {

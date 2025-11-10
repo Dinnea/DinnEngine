@@ -1,7 +1,6 @@
 #include "dnpch.h"
-#include "WinWindow.h"
-
 #include "DinnCore/glfw_glad.h"
+#include "WinWindow.h"
 
 
 namespace Dinn 
@@ -80,9 +79,12 @@ namespace Dinn
 
 
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		DN_CORE_ASSERT(status, "Failed to initalize glad!")
+		DN_CORE_ASSERT(status, "Failed to initalize glad!");
 
 		glViewport(0, 0, (int)props.Width, (int)props.Height);
+
+		DN_CORE_INFO("OpenGL Version: {0}", (const char*)glGetString(GL_VERSION));
+
 			//Set GLFW callbacks
 
 			glfwSetWindowSizeCallback(Window, [](GLFWwindow* window, int width, int height)
@@ -186,4 +188,3 @@ namespace Dinn
 		return *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 	}
 }
-

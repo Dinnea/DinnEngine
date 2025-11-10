@@ -1,14 +1,16 @@
 #include "dnpch.h"
-#include "Texture.h"
+#include "glad/glad.h"
 #include "../../../dependencies/stb/stb_image.h" //woah this is gross, need to fix this
+#include "Texture.h"
 
 namespace Dinn
 {
-	Texture::Texture(const char* path, uint32_t type, uint32_t slot, uint32_t format, uint32_t pixelType)
+	Texture::Texture(const char* path, uint32_t type, uint32_t slot, uint32_t pixelType)
 	{
 		this->type = type;
 
 		int width, height, colorChannels;
+		GLenum format;
 
 		stbi_set_flip_vertically_on_load(true);
 
@@ -24,11 +26,18 @@ namespace Dinn
 		glActiveTexture(slot);
 		Bind();
 
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
 		glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 		glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 		glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		if (colorChannels == 4)
+			format = GL_RGBA;
+		else if (colorChannels == 3)
+			format = GL_RGB;
 
 		glTexImage2D(type, 0, GL_RGBA, width, height, 0, format, pixelType, bytes);
 
