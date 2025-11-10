@@ -66,7 +66,7 @@ Currently only supports Windows and Visual Studio. Uses C++ 20
    Run the provided batch script:
 
    ```
-   GenerateProjects.bat
+   generate-projects.bat
    ```
 
    This will configure the project using CMake and generate a Visual Studio solution, which then will open automatically.
