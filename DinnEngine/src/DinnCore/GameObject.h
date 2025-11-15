@@ -20,7 +20,7 @@ namespace Dinn
 
 		void Destroy();
 
-		virtual void Update() {}
+		virtual void Update();
 
 		~GameObject();
 
@@ -46,13 +46,26 @@ namespace Dinn
 			//DN_CORE_WARN("No component of type {0} found", typeid(T).name());
 			return nullptr;
 		}
+		template<class T>
+		void RemoveComponent()
+		{
+			for (auto it = components.begin(); it != components.end(); ++it)
+			{
+				if (dynamic_cast<T*>(it->get()))
+				{
+					components.erase(it);
+					return;
+				}
+			}
+		}
 
 		std::string name = "New Game Object";
 
+	protected:
+		std::unique_ptr<Transform> transform;
 
 	private:
 		unsigned int id;
-		std::unique_ptr<Transform> transform;
 		std::vector<std::unique_ptr<Component>> components;
 		Application* context;
 	};

@@ -270,12 +270,13 @@ namespace Dinn::Input
         }
     }
 
-    inline static bool GetKeyDown(const Keyboard key)
+    inline bool GetKeyDown(const Keyboard key)
     {
-        return ::Dinn::Application::Instance().GetWindow().IsKeyDown(key);
+        return Application::Instance().GetWindow().IsKeyDown(key);
     }
-    inline static bool GetKeyDown(const Mouse btn)
+
+    inline bool GetKeyDown(const Mouse btn)
     {
-        return ::Dinn::Application::Instance().GetWindow().IsMouseDown(btn);
+        return Application::Instance().GetWindow().IsMouseDown(btn);
     }
 }

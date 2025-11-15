@@ -146,7 +146,7 @@ namespace Dinn
 
 	bool Application::OnKeyEvent(Event& event)
 	{
-		//DN_CORE_TRACE(event.ToString());
+		DN_CORE_TRACE(event.ToString());
 		return true;
 	}
 }
