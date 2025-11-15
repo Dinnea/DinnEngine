@@ -37,7 +37,7 @@ Currently only supports Windows and Visual Studio. Uses C++ 20
    
 ### Screenshots
 <img width="441" height="478" alt="image" src="https://github.com/user-attachments/assets/4feb87ce-3d0d-4192-87b3-13cc51144cf2" />
-<img width="1190" height="902" alt="image" src="https://github.com/user-attachments/assets/c001f78a-ce18-499f-adb0-1d700155931f" />
+![Moving object](https://github.com/user-attachments/assets/cbb66200-7de1-4e7c-ae96-fbf9bbe2e370)
 
 
 
