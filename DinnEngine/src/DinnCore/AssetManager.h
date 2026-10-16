@@ -48,8 +48,12 @@ namespace Dinn
 		/// Incorrect:  LoadShader("Resources/Shaders/Lighting/Phong.vert", ...)
 		/// Incorrect:  LoadShader("/Lighting/Phong.vert", ...)
 		std::shared_ptr<Shader> LoadShader(const std::string& vertexPath, const std::string& fragmentPath);
-
+		
+		static AssetManager& GetInstance() { return *instance; }
+		
 	private:
+		inline static AssetManager* instance = nullptr;
+		
 		std::unordered_map<std::string, std::shared_ptr<Texture>> textureCache;
 		std::unordered_map<std::string, std::shared_ptr<Shader>> shaderCache;
 

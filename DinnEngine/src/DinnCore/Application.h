@@ -43,6 +43,14 @@ namespace Dinn
 		
 		static unsigned int GenerateGameObjectId() { return lastGameObjectId++; }
 
+	protected:
+		std::unique_ptr<Window> window;
+
+		std::unique_ptr<AssetManager> assetManager;
+		
+		std::unique_ptr<SceneManager> sceneManager;
+
+		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
@@ -52,13 +60,6 @@ namespace Dinn
 
 		void ExeDestroyObjects();
 		
-		std::unique_ptr<Window> window;
-
-		std::unique_ptr<AssetManager> assetManager;
-		
-		std::unique_ptr<SceneManager> sceneManager;
-
-		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 		std::unordered_map<unsigned int, std::unique_ptr<GameObject>> gameObjects;
 

@@ -23,7 +23,7 @@ namespace Dinn
         OnStartFrame();
     }
 
-    void Scene::Update(float deltaTime)
+    void Scene::Update(double deltaTime)
     {        
         for (auto& [id, objPtr] : gameObjects)
         {

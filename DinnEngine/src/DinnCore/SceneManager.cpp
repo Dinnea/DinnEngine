@@ -2,15 +2,7 @@
 #include "SceneManager.h"
 
 namespace Dinn
-{
-    SceneManager::SceneManager()
-    {
-    }
-
-    SceneManager::~SceneManager()
-    {
-    }
-
+{    
     Scene* SceneManager::GetScene(std::string sceneName) const
     {
         for (auto& scene : scenes)
@@ -32,7 +24,7 @@ namespace Dinn
         return scenes[id].get();
     }
 
-    Scene* SceneManager::GetCurrentScene()
+    Scene* SceneManager::GetCurrentScene() const
     {
         return currentScene;
     }

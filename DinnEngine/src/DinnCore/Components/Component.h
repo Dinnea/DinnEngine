@@ -7,11 +7,11 @@ namespace Dinn
 	friend class GameObject;
 		public:
 			GameObject* GetOwner() const { return owner; }
-			virtual ~Component() = default;
+			virtual ~Component(){}
 
 		protected:
 			explicit Component(GameObject& owner) :owner(&owner){}
-			virtual void Update() {};
+			virtual void Update() {}
 			GameObject* owner;
 	};
 }

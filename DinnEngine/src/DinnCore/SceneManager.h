@@ -1,13 +1,16 @@
 ﻿#pragma once
 #include "Scene.h"
+#include "Core.h"
 
 namespace Dinn
 {
-    class SceneManager
+    class DINN_API SceneManager
     {
     public:
-        SceneManager();
-        ~SceneManager();
+        SceneManager() = default;
+        ~SceneManager() = default;
+        SceneManager(const SceneManager&) = delete;
+        SceneManager& operator=(const SceneManager&) = delete;
         
         template<class T, class ... Args>
         T& CreateScene(std::string sceneName, Args&&... args)
@@ -19,13 +22,17 @@ namespace Dinn
             
             DN_CORE_INFO("Created Scene: {0}", sceneName);
             
+            if (currentScene == nullptr)
+                currentScene = scene.get();
+            
             scenes.push_back(std::move(scene));
+            
             return ref;
         }
         
         Scene* GetScene(std::string sceneName) const;
         Scene* GetScene(unsigned int id) const;
-        Scene* GetCurrentScene();
+        Scene* GetCurrentScene() const;
         
         void SetCurrentScene(Scene& scene);
         void SetCurrentScene(std::string sceneName);

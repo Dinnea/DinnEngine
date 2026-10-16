@@ -6,6 +6,8 @@ namespace Dinn
 {
     AssetManager::AssetManager()
     {
+        instance = this;
+        
         defaultTexture = LoadTexture("default.jpg");
         defaultShader = LoadShader("default.vert", "default.frag");
     }
@@ -14,6 +16,7 @@ namespace Dinn
     {
         textureCache.clear();
         shaderCache.clear();
+        instance = nullptr;
     }
 
     std::shared_ptr<Texture> AssetManager::LoadTexture(const std::string& path)

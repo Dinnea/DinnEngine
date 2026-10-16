@@ -1,4 +1,7 @@
 ﻿#pragma once
+#include "Core.h"
+#include "dnpch.h"
+
 namespace Dinn
 {
     class GameObject;
@@ -7,18 +10,18 @@ namespace Dinn
     {
     public:
         Scene();
+        Scene(std::string SceneName);
         virtual ~Scene();
-        explicit Scene(std::string SceneName);
        
        Scene(const Scene&) = delete;
        Scene& operator=(const Scene&) = delete;
         
         void StartFrame();
-        void Update(float deltaTime);
+        void Update(double deltaTime);
         void EndFrame();
        
         virtual void OnStartFrame() {} 
-        virtual void OnUpdate(float deltaTime){}
+        virtual void OnUpdate(double deltaTime){}
         virtual void OnEndFrame(){}
         
         std::string name = "Scene";

@@ -2,7 +2,6 @@
 #include "Application.h"
 #include "glfw_glad.h"
 #include "Rendering/SpriteRenderer.h"
-#include "Rendering/Texture.h"
 #include <queue>
 
 namespace Dinn
@@ -46,9 +45,9 @@ namespace Dinn
 
 		while (isRunning)
 		{
-			auto* scene = sceneManager->GetCurrentScene();
+			auto* loadedScene = sceneManager->GetCurrentScene();
 			
-			if (!scene)
+			if (!loadedScene)
 			{
 				DN_CORE_ERROR("Scene not found");
 				 isRunning = false;
@@ -61,6 +60,8 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
+				loadedScene->Update(deltaTime);
+				
 				//spriteRenderer->InitFrame();
 
 				// for (auto& [id, objPtr] : gameObjects)
