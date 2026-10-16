@@ -24,6 +24,8 @@ namespace Dinn
         /// <param name="width"> => window width</param>
         /// <param name="height"> => window height</param>
         void SetProjection(float width, float height);
+		
+		static SpriteRenderer * GetInstance() { return instance; }
 
     private:
 
@@ -36,5 +38,7 @@ namespace Dinn
         std::unique_ptr <EBO> ebo;
         std::shared_ptr<Shader> defaultShader;
         std::shared_ptr<Texture> defaultTexture;
+		
+		inline static SpriteRenderer * instance = nullptr;
 	};
 }

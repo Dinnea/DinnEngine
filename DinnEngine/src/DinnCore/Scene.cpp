@@ -24,16 +24,19 @@ namespace Dinn
     }
 
     void Scene::Update(double deltaTime)
-    {        
+    {       
+        SpriteRenderer *renderer = SpriteRenderer::GetInstance();
+        renderer->InitFrame();
+        
         for (auto& [id, objPtr] : gameObjects)
         {
             objPtr->Update();
 
-            //auto* sprite = objPtr->GetComponent<Sprite>();
-            //Transform* transform = objPtr->GetTransform();
+            auto* sprite = objPtr->GetComponent<Sprite>();
+            Transform* transform = objPtr->GetTransform();
 
-            //if (sprite)
-              //  spriteRenderer->Draw(*sprite, *transform);
+            if (sprite)
+                renderer->Draw(*sprite, *transform);
         }
         OnUpdate(deltaTime);
     }
@@ -41,7 +44,6 @@ namespace Dinn
     void Scene::EndFrame()
     {
         ExeDestroyObjects();
-        
         OnEndFrame();
     }
 

@@ -5,10 +5,7 @@
 #include "Events/WindowEvent.h"
 #include "GameObject.h"
 #include "Rendering/SpriteRenderer.h"
-#include "Time.h"
 #include "Window.h"
-#include <chrono>
-#include <thread>
 
 #include "SceneManager.h"
 

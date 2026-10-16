@@ -60,6 +60,7 @@ namespace Dinn
 
 			if (deltaTime > 0.0)
 			{
+				loadedScene -> StartFrame();
 				loadedScene->Update(deltaTime);
 				
 				//spriteRenderer->InitFrame();
@@ -94,7 +95,7 @@ namespace Dinn
 
 			// Post frame operations
 			Time::SetDeltaTime(deltaTime);
-			ExeDestroyObjects();
+			loadedScene->EndFrame();
 		}
 	}
 

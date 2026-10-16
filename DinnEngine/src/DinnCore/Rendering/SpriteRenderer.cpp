@@ -10,6 +10,7 @@ namespace Dinn
 {
 	SpriteRenderer::SpriteRenderer()
 	{
+		if (!instance) instance = this;
 		Initialize();
 	}
 	SpriteRenderer::~SpriteRenderer()
