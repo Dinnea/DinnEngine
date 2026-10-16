@@ -21,6 +21,8 @@ namespace Dinn
 		window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		assetManager = std::make_unique<AssetManager>();
+		
+		sceneManager = std::make_unique<SceneManager>();
 
 		spriteRenderer = std::make_unique<SpriteRenderer>();
 		spriteRenderer->SetProjection(window->GetWidth(), window->GetHeight());
@@ -44,25 +46,33 @@ namespace Dinn
 
 		while (isRunning)
 		{
-
+			auto* scene = sceneManager->GetCurrentScene();
+			
+			if (!scene)
+			{
+				DN_CORE_ERROR("Scene not found");
+				 isRunning = false;
+			}
+			
+			
 			double currentTime = Time::Now();
 			double deltaTime = currentTime - lastFrame;
 			lastFrame = currentTime;
 
 			if (deltaTime > 0.0)
 			{
-				spriteRenderer->InitFrame();
+				//spriteRenderer->InitFrame();
 
-				for (auto& [id, objPtr] : gameObjects)
-				{
-					objPtr->Update();
-
-					auto* sprite = objPtr->GetComponent<Sprite>();
-					Transform* transform = objPtr->GetTransform();
-
-					if (sprite)
-						spriteRenderer->Draw(*sprite, *transform);
-				}
+				// for (auto& [id, objPtr] : gameObjects)
+				// {
+				// 	objPtr->Update();
+				//
+				// 	auto* sprite = objPtr->GetComponent<Sprite>();
+				// 	Transform* transform = objPtr->GetTransform();
+				//
+				// 	if (sprite)
+				// 		spriteRenderer->Draw(*sprite, *transform);
+				// }
 
 				window->Update();
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "DinnCore/Sprite.h"
+#include "DinnCore/Components/Sprite.h"
 #include "DinnCore/Transform.h"
 #include "RendererComponents.h"
 

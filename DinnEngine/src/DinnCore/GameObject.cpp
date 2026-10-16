@@ -17,26 +17,28 @@ namespace Dinn
 
 	void GameObject::Update()
 	{
-
-		if (Input::GetKeyDown(Input::Keyboard::W))
-		{
-			transform->position += glm::vec2(0, 1);
-		}
-
-		if (Input::GetKeyDown(Input::Keyboard::S))
-		{
-			transform->position += glm::vec2(0, -1);
-		}
-
-		if (Input::GetKeyDown(Input::Keyboard::A))
-		{
-			transform->position += glm::vec2(-1, 0);
-		}
-
-		if (Input::GetKeyDown(Input::Keyboard::D))
-		{
-			transform->position += glm::vec2(1, 0);
-		}
+		for (auto& component : components)
+			component->Update();
+		
+		// if (Input::GetKeyDown(Input::Keyboard::W))
+		// {
+		// 	transform->position += glm::vec2(0, 1);
+		// }
+		//
+		// if (Input::GetKeyDown(Input::Keyboard::S))
+		// {
+		// 	transform->position += glm::vec2(0, -1);
+		// }
+		//
+		// if (Input::GetKeyDown(Input::Keyboard::A))
+		// {
+		// 	transform->position += glm::vec2(-1, 0);
+		// }
+		//
+		// if (Input::GetKeyDown(Input::Keyboard::D))
+		// {
+		// 	transform->position += glm::vec2(1, 0);
+		// }
 	}
 
 	GameObject::~GameObject()

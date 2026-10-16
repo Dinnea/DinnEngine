@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "DinnCore/Rendering/Components/Shader.h"
-#include "Rendering/Texture.h"
+#include "DinnCore/Rendering/Texture.h"
 
 namespace Dinn
 {

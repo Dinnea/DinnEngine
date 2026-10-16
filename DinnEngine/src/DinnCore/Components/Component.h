@@ -11,8 +11,7 @@ namespace Dinn
 
 		protected:
 			explicit Component(GameObject& owner) :owner(&owner){}
-
-		private:
+			virtual void Update() {};
 			GameObject* owner;
 	};
 }

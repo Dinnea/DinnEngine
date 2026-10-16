@@ -10,6 +10,8 @@
 #include <chrono>
 #include <thread>
 
+#include "SceneManager.h"
+
 namespace Dinn
 {
 	class DINN_API Application
@@ -31,11 +33,15 @@ namespace Dinn
 		Window& GetWindow() noexcept  { return *window; }
 
 		AssetManager& GetAssetManager() noexcept { return *assetManager; }
+		
+		SceneManager& GetSceneManager() noexcept { return *sceneManager; }
 
 		GameObject& CreateGameObject();
 
 
 		static Application& Instance() noexcept { return *instance; }
+		
+		static unsigned int GenerateGameObjectId() { return lastGameObjectId++; }
 
 
 	private:
@@ -45,23 +51,26 @@ namespace Dinn
 		bool OnKeyEvent(Event& event);
 
 		void ExeDestroyObjects();
-		bool isRunning;
-		unsigned int maxFrameRate;
-		double lastFrame;
-
-		unsigned int lastGameObjectId = 0;
-
+		
 		std::unique_ptr<Window> window;
 
 		std::unique_ptr<AssetManager> assetManager;
+		
+		std::unique_ptr<SceneManager> sceneManager;
 
 		std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 		std::unordered_map<unsigned int, std::unique_ptr<GameObject>> gameObjects;
 
 		std::vector<unsigned int> destroyQueue;
+		
+		double lastFrame;
+		unsigned int maxFrameRate;
+		bool isRunning;
+
 
 		static Application* instance;
+		inline static unsigned int lastGameObjectId = 0;
 	};
 
 	// To be defined in client

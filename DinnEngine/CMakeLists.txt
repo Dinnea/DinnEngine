@@ -44,7 +44,7 @@ target_include_directories(DinnEngine
     "${GLAD_ROOT}/include"
 )
 
-if (MSVC)
+
   set(PCH_HEADER dnpch.h)
   set(PCH_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/src/dnpch.cpp)
   set(PCH_NAME   ${TARGET_ENGINE}.pch)  # e.g. DinnEngine.pch
@@ -62,7 +62,7 @@ if (MSVC)
     "/Fp$(IntDir)${PCH_NAME}"
     "/FI${PCH_HEADER}"
   )
-endif()
+
 
 target_compile_options(DinnEngine PRIVATE /FI"dnpch.h")
 

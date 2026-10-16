@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "Components/Component.h"
 #include "Transform.h"
 
 namespace Dinn
@@ -46,6 +46,7 @@ namespace Dinn
 			//DN_CORE_WARN("No component of type {0} found", typeid(T).name());
 			return nullptr;
 		}
+		
 		template<class T>
 		void RemoveComponent()
 		{

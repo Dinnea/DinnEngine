@@ -5,6 +5,10 @@ echo Killing all Visual Studio instances...
 taskkill /F /IM devenv.exe /T >nul 2>&1
 echo Done.
 
+echo Killing all rider instances...
+taskkill /F /IM rider64.exe /T
+echo Done.
+
 echo Starting solution...
 start "" "DinnEngine.sln"
 PAUSE
