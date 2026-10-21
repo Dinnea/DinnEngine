@@ -2,6 +2,8 @@
 #include "Core.h"
 #include "dnpch.h"
 
+#include "Components/Sprite.h"
+
 namespace Dinn
 {
     class GameObject;
@@ -23,6 +25,10 @@ namespace Dinn
         virtual void OnStartFrame() {} 
         virtual void OnUpdate(double deltaTime){}
         virtual void OnEndFrame(){}
+       
+        void RegisterSprite(Sprite* sprite);
+        void UnregisterSprite(Sprite* spritesToRender);
+       
         
         std::string name = "Scene";
         
@@ -31,13 +37,17 @@ namespace Dinn
        /// <summary>
        /// Marks a game object for destroying at the end of the frame.
        /// </summary>
-       void Destroy(GameObject& gameObject);
+       void Destroy(const GameObject& gameObject);
         
     private:
-       void ExeDestroyObjects();
+       void RegisterPendingObjects();
+       void DestroyPendingObjects();
        
         std::unordered_map<unsigned int, std::unique_ptr<GameObject>> gameObjects;
+        std::unordered_map<unsigned int, std::unique_ptr<GameObject>> pendingGameObjects;
         std::vector<unsigned int> destroyQueue;
+       
+        std::vector<Sprite*> sprites;
         
         //unsigned int id = 0;
     };

@@ -15,6 +15,7 @@ namespace Dinn
         void Shutdown();
 
         void InitFrame();
+		void Draw(const Sprite& sprite);
         void Draw(const Sprite& sprite, const Transform& transform);
         void EndFrame();
 

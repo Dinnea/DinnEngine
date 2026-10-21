@@ -30,7 +30,7 @@ namespace Dinn
 		virtual int GetEventFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 
-		inline bool HasFlag(EventFlag flag) const { return GetEventFlags() & flag; }
+		bool HasFlag(EventFlag flag) const { return GetEventFlags() & flag; }
 		bool handled = false;
 	};
 

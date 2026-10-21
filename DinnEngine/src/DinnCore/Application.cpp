@@ -4,6 +4,8 @@
 #include "Rendering/SpriteRenderer.h"
 #include <queue>
 
+#include "Time.h"
+
 namespace Dinn
 {
 	Application* Application::instance = nullptr;
@@ -117,19 +119,7 @@ namespace Dinn
 	{
 		destroyQueue.push_back(gameObject.ID());
 	}
-
-	GameObject& Application::CreateGameObject()
-	{
-		unsigned int id = lastGameObjectId++;
-		auto obj = std::make_unique<GameObject>(id);
-		auto& ref = *obj;
-
-		gameObjects.emplace(id, std::move(obj));
-
-		DN_CORE_INFO("Created GameObject {0}", id);
-
-		return ref;
-	}
+	
 
 	void Application::ExeDestroyObjects()
 	{
@@ -149,7 +139,7 @@ namespace Dinn
 		return true;
 	}
 
-	bool Application::OnWindowResize(WindowResizeEvent& event)
+	bool Application::OnWindowResize(WindowResizeEvent& event) const
 	{
 		spriteRenderer->SetProjection(event.GetWidth(), event.GetHeight());
 

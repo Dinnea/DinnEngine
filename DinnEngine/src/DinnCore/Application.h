@@ -51,7 +51,7 @@ namespace Dinn
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
-		bool OnWindowResize(WindowResizeEvent& event);
+		bool OnWindowResize(WindowResizeEvent& event) const;
 
 		bool OnKeyEvent(Event& event);
 

@@ -59,6 +59,11 @@ namespace Dinn
 		vao.Bind();
 	}
 
+	void SpriteRenderer::Draw(const Sprite& sprite)
+	{
+		Draw(sprite, *sprite.GetOwner()->GetTransform());
+	}
+
 	void SpriteRenderer::Draw(const Sprite& sprite, const Transform& transform)
 	{
 		auto shader = sprite.GetShader();
